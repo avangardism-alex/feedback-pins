@@ -1,12 +1,12 @@
 # Feedback Pins
 
+[Français](README.fr.md) · **English**
+
 ![Feedback Pins](.wordpress-org/banner-1544x500.png)
 
 **Your clients pin feedback right on the page. Your team sees it all, live, on one board.**
 
 A free WordPress plugin by [AVANGARDISM](https://avangardism.com/?utm_source=github&utm_medium=readme&utm_campaign=feedback-pins). No account, no SaaS, no premium version: notes and screenshots stay in your own WordPress.
-
-[Français plus bas ↓](#en-français)
 
 ---
 
@@ -124,13 +124,4 @@ GPL-2.0-or-later. html2canvas is MIT, see `assets/vendor/html2canvas-LICENSE.txt
 
 ---
 
-## En français
-
-**Feedback Pins** est l'outil de recette que nous utilisons chez [AVANGARDISM](https://avangardism.com/?utm_source=github&utm_medium=readme&utm_campaign=feedback-pins) avec nos propres clients, partagé gratuitement.
-
-- Le client ouvre un lien, clique sur un élément de la page, écrit sa remarque : une pastille numérotée reste posée dessus, avec une capture d'écran.
-- Toute l'équipe voit les remarques des autres en moins de 15 secondes, sur les pages et sur un tableau (À faire, En cours, Terminé).
-- Notifications Slack envoyées par votre propre serveur, export Markdown prêt à coller dans un ticket.
-- Gratuit, sans compte, sans version premium. Les données restent dans votre WordPress.
-
-L'extension est entièrement traduite en français. Besoin d'un site, d'une boutique ou d'un logiciel métier ? [Parlons de votre projet](https://avangardism.com/contact?utm_source=github&utm_medium=readme&utm_campaign=feedback-pins).
+Need a website, an online store or business software? [Let's talk about your project](https://avangardism.com/contact?utm_source=github&utm_medium=readme&utm_campaign=feedback-pins).

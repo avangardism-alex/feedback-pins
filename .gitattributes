@@ -5,6 +5,7 @@
 /.gitignore       export-ignore
 /.distignore      export-ignore
 /README.md        export-ignore
+/README.fr.md     export-ignore
 /CHANGELOG.md     export-ignore
 
 *.png binary
