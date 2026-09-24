@@ -1,0 +1,24 @@
+name: Plugin Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP syntax (7.4 and 8.4)
+        run: |
+          for v in 7.4 8.4; do
+            docker run --rm -v "$PWD":/app -w /app php:$v-cli sh -c 'find . -name "*.php" -exec php -l {} \; | grep -v "^No syntax errors"; exit 0'
+            docker run --rm -v "$PWD":/app -w /app php:$v-cli sh -c 'for f in $(find . -name "*.php"); do php -l "$f" > /dev/null || exit 1; done'
+          done
+
+      - name: WordPress Plugin Check
+        uses: wordpress/plugin-check-action@v1
+        with:
+          exclude-directories: '.github,.wordpress-org'
