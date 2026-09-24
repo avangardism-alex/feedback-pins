@@ -18,7 +18,12 @@ jobs:
             docker run --rm -v "$PWD":/app -w /app php:$v-cli sh -c 'for f in $(find . -name "*.php"); do php -l "$f" > /dev/null || exit 1; done'
           done
 
+      - name: Build the plugin as it ships
+        run: |
+          mkdir -p build/feedback-pins
+          rsync -a --exclude-from=.distignore --exclude=build ./ build/feedback-pins/
+
       - name: WordPress Plugin Check
         uses: wordpress/plugin-check-action@v1
         with:
-          exclude-directories: '.github,.wordpress-org'
+          build-dir: build/feedback-pins

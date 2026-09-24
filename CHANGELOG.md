@@ -10,4 +10,5 @@ First public release.
 - Slack notifications through an incoming webhook
 - Markdown and JSON export
 - Admin toolbar shortcut
+- Keyboard and screen reader support, WCAG AA contrast
 - English and French

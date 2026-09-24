@@ -37,6 +37,7 @@ Built by [AVANGARDISM](https://avangardism.com/?utm_source=wordpress.org&utm_med
 * **No account for your clients**: a shared key in the link is enough.
 * **Lightweight**: visitors who never opened a review link only download a few hundred bytes.
 * **Works behind page caches**: review mode is decided in the browser, not on the server.
+* **Accessible**: usable with the keyboard alone (Tab to an element, Enter to pin it), screen reader announcements, WCAG AA contrast, reduced motion respected.
 * **Translation ready**, French included.
 
 = Your data stays yours =

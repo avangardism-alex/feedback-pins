@@ -8,14 +8,14 @@
 	--fpins-violet: #714edd;
 	--fpins-violet-pale: #eae2fe;
 	--fpins-yellow: #feffb7;
-	--fpins-grey: #6b6b6b;
+	--fpins-grey: #5f5f5f;
 	--fpins-border: #dcdce6;
 	--fpins-bg: #f5f5f7;
 	--fpins-blocker: #dc2626;
-	--fpins-major: #ea580c;
-	--fpins-minor: #ca8a04;
+	--fpins-major: #c2410c;
+	--fpins-minor: #a16207;
 	--fpins-nice: #7c3aed;
-	--fpins-ok: #16a34a;
+	--fpins-ok: #15803d;
 	--fpins-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -58,7 +58,7 @@
 	box-shadow: none;
 }
 .fpins-btn:hover { border-color: var(--fpins-violet); }
-.fpins-btn:focus-visible, .fpins-page button:focus-visible, .fpins-bar button:focus-visible, .fpins-bar a:focus-visible {
+.fpins-btn:focus-visible, [data-fpins] :focus-visible, .fpins-page :focus-visible, .fpins-layer :focus-visible {
 	outline: 2px solid var(--fpins-violet);
 	outline-offset: 2px;
 }
@@ -112,7 +112,7 @@
 .fpins-edge-minor { border-left: 4px solid var(--fpins-minor) !important; }
 .fpins-edge-nice { border-left: 4px solid var(--fpins-nice) !important; }
 
-.fpins-status { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: var(--fpins-violet-pale); color: var(--fpins-violet); white-space: nowrap; }
+.fpins-status { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: var(--fpins-violet-pale); color: #5b3cc4; white-space: nowrap; }
 .fpins-status-in_progress { background: #ffedd5; color: var(--fpins-major); }
 .fpins-status-fixed { background: #dcfce7; color: var(--fpins-ok); }
 .fpins-status-wontfix { background: #eee; color: var(--fpins-grey); }
@@ -315,7 +315,7 @@ html.fpins-adding [data-fpins], html.fpins-adding [data-fpins] * { cursor: point
 	cursor: pointer;
 }
 .fpins-row:hover { background: var(--fpins-bg); }
-.fpins-row-closed { opacity: .6; }
+.fpins-row-closed { background: #f3f3f6; }
 .fpins-row-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
 
 /* ── Board ──────────────────────────────────────────────────────────────── */
@@ -344,7 +344,7 @@ body.fpins-page { margin: 0; min-height: 100vh; background: var(--fpins-bg); }
 .fpins-cards { display: flex; flex-direction: column; gap: 8px; min-height: 40px; }
 
 .fpins-card { padding: 10px 12px; border-radius: 10px; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); cursor: grab; }
-.fpins-card-closed { opacity: .7; }
+.fpins-card-closed { background: #f3f3f6; box-shadow: none; }
 .fpins-card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 6px; font-size: 11px; }
 .fpins-badge { padding: 1px 7px; border-radius: 999px; color: #fff; font-weight: 700; }
 .fpins-card-head a { color: var(--fpins-violet); font-weight: 600; text-decoration: none; word-break: break-all; }
@@ -358,9 +358,9 @@ body.fpins-page { margin: 0; min-height: 100vh; background: var(--fpins-bg); }
 
 .fpins-export { width: 100%; min-height: 300px; font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; background: #fafafa; }
 
-.fpins-credit { margin: 32px 0 0; text-align: center; font-size: 12px; color: var(--fpins-grey); }
-.fpins-credit a { color: var(--fpins-violet); font-weight: 600; text-decoration: none; }
-.fpins-credit a:hover { text-decoration: underline; }
+.fpins-credit { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 40px 0 0; font-size: 12px; color: var(--fpins-grey); }
+.fpins-credit img { display: block; width: 105px; height: auto; opacity: .85; transition: opacity .15s; }
+.fpins-credit a:hover img, .fpins-credit a:focus-visible img { opacity: 1; }
 
 /* ── Screenshots and targeting ──────────────────────────────────────────── */
 
@@ -385,3 +385,6 @@ body.fpins-page { margin: 0; min-height: 100vh; background: var(--fpins-bg); }
 /* In add mode, pins let the click through: you must be able to comment on an
    element someone else already commented on. */
 html.fpins-adding .fpins-layer, html.fpins-adding .fpins-layer * { pointer-events: none !important; }
+
+/* Visually hidden, still read by screen readers. */
+.fpins-sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

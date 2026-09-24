@@ -173,14 +173,16 @@ function fpins_admin_assets( $hook ) {
 .fpins-copy input { flex: 1; min-width: 0; font-family: Menlo, Consolas, monospace; font-size: 12px; }
 .fpins-steps { margin: 8px 0 0 18px; }
 .fpins-steps li { margin-bottom: 4px; }
-.fpins-count { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: #eae2fe; color: #714edd; font-size: 12px; font-weight: 600; vertical-align: middle; }
+.fpins-count { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: #eae2fe; color: #5b3cc4; font-size: 12px; font-weight: 600; vertical-align: middle; }
 .fpins-studio { background: #1e0e4e !important; color: #fff; border: 0 !important; }
 .fpins-studio h2, .fpins-studio p { color: #fff; }
 .fpins-studio p { opacity: .85; }
 .fpins-studio .button-primary { background: #feffb7; border-color: #feffb7; color: #1e0e4e; }
 .fpins-studio .button-primary:hover, .fpins-studio .button-primary:focus { background: #fff; border-color: #fff; color: #1e0e4e; }
 .fpins-studio a:not(.button) { color: #feffb7; }
-.fpins-studio-name { font-weight: 800; letter-spacing: .08em; }
+.fpins-studio-logo { margin: 0 0 14px; }
+.fpins-studio-logo img { display: block; width: 140px; height: auto; opacity: 1; }
+.fpins-studio .fpins-studio-logo { opacity: 1; }
 CSS;
 
 	$js = <<<'JS'
@@ -212,11 +214,12 @@ add_action( 'admin_enqueue_scripts', 'fpins_admin_assets' );
  *
  * @param string $id    Field ID.
  * @param string $value Value.
+ * @param string $label Accessible name of the field.
  */
-function fpins_copy_field( $id, $value ) {
+function fpins_copy_field( $id, $value, $label ) {
 	?>
 	<div class="fpins-copy">
-		<input type="text" id="<?php echo esc_attr( $id ); ?>" class="regular-text" readonly value="<?php echo esc_attr( $value ); ?>" onclick="this.select()">
+		<input type="text" id="<?php echo esc_attr( $id ); ?>" class="regular-text" readonly value="<?php echo esc_attr( $value ); ?>" aria-label="<?php echo esc_attr( $label ); ?>" onclick="this.select()">
 		<button type="button" class="button" data-fpins-copy="<?php echo esc_attr( $id ); ?>" data-done="<?php esc_attr_e( 'Copied!', 'feedback-pins' ); ?>"><?php esc_html_e( 'Copy', 'feedback-pins' ); ?></button>
 	</div>
 	<?php
@@ -276,7 +279,7 @@ function fpins_admin_page() {
 						</span>
 					</h2>
 					<p><?php esc_html_e( 'Send this link to your client, your project manager, your team. Anyone who opens it can pin notes on any page and sees everyone else’s notes.', 'feedback-pins' ); ?></p>
-					<?php fpins_copy_field( 'fpins-invite', fpins_invite_url() ); ?>
+					<?php fpins_copy_field( 'fpins-invite', fpins_invite_url(), __( 'Invitation link', 'feedback-pins' ) ); ?>
 					<ol class="fpins-steps">
 						<li><?php esc_html_e( 'The link turns on the review toolbar and stores the key in the browser. The key is then removed from the address bar.', 'feedback-pins' ); ?></li>
 						<li><?php esc_html_e( 'On first use, the reviewer types a first name to sign the notes.', 'feedback-pins' ); ?></li>
@@ -287,7 +290,7 @@ function fpins_admin_page() {
 				<div class="card">
 					<h2><?php esc_html_e( 'Feedback board', 'feedback-pins' ); ?></h2>
 					<p><?php esc_html_e( 'Every note in three columns (To do, In progress, Done), with filters, drag and drop, answers and a Markdown or JSON export.', 'feedback-pins' ); ?></p>
-					<?php fpins_copy_field( 'fpins-board', fpins_board_invite_url() ); ?>
+					<?php fpins_copy_field( 'fpins-board', fpins_board_invite_url(), __( 'Board link', 'feedback-pins' ) ); ?>
 					<p><a class="button" href="<?php echo esc_url( fpins_board_invite_url() ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Open the board', 'feedback-pins' ); ?></a></p>
 				</div>
 
@@ -364,7 +367,7 @@ function fpins_admin_page() {
 
 			<aside>
 				<div class="card fpins-studio">
-					<p class="fpins-studio-name">AVANGARDISM</p>
+					<p class="fpins-studio-logo"><a href="<?php echo esc_url( fpins_avangardism_url( 'admin-logo' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( FPINS_URL . 'assets/images/avangardism-light.svg' ); ?>" width="140" height="32" alt="AVANGARDISM"></a></p>
 					<h2><?php esc_html_e( 'Free, for good', 'feedback-pins' ); ?></h2>
 					<p><?php esc_html_e( 'Feedback Pins is the review tool we use with our own clients. We share it for free: no account, no premium version, your data stays in your WordPress.', 'feedback-pins' ); ?></p>
 					<p><?php esc_html_e( 'AVANGARDISM is a web agency: websites, e-commerce, business software and UX/UI design, with a user-first approach.', 'feedback-pins' ); ?></p>

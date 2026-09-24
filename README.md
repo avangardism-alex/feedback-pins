@@ -36,6 +36,7 @@ Website feedback usually arrives as a pile of emails with blurry screenshots and
 - Admin toolbar shortcut: review the current page in one click
 - About 500 bytes for regular visitors: everything else is loaded on demand
 - Works behind full-page caches (review mode is decided in the browser)
+- Accessible: keyboard only pinning (Tab + Enter), screen reader announcements, WCAG AA contrast, checked with axe-core
 - Translation ready, French included
 
 ## Install

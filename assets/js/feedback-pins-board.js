@@ -18,10 +18,10 @@
 
 	var COLUMNS = [
 		{ key: 'open', title: t('To do'), color: '#714edd' },
-		{ key: 'in_progress', title: t('In progress'), color: '#ea580c' },
-		{ key: 'fixed', title: t('Done'), color: '#16a34a' }
+		{ key: 'in_progress', title: t('In progress'), color: '#c2410c' },
+		{ key: 'fixed', title: t('Done'), color: '#15803d' }
 	];
-	var SEVERITY_COLOR = { blocker: '#dc2626', major: '#ea580c', minor: '#ca8a04', nice: '#7c3aed' };
+	var SEVERITY_COLOR = { blocker: '#dc2626', major: '#c2410c', minor: '#a16207', nice: '#7c3aed' };
 
 	var filters = { page: 'all', author: 'all', severity: 'all' };
 	var dragging = null; // id of the card being dragged
@@ -118,7 +118,7 @@
 				])
 			]),
 			el('div', { class: 'fpins-tools' }, [
-				el('span', { class: 'fpins-sync' + (st.ok ? '' : ' fpins-sync-ko'), title: st.ok ? t('In sync with the team') : st.message }),
+				el('span', { class: 'fpins-sync' + (st.ok ? '' : ' fpins-sync-ko'), role: 'img', title: st.ok ? t('In sync with the team') : t('Sync failed: %s', st.message), 'aria-label': st.ok ? t('In sync with the team') : t('Sync failed: %s', st.message) }),
 				el('button', { type: 'button', class: 'fpins-btn', text: store.author() ? t('You are %s', store.author()) : t('Sign in'), onclick: function () { F.identify(render); } }),
 				el('button', { type: 'button', class: 'fpins-btn fpins-btn-dark', text: t('Export'), disabled: !all.length, onclick: exportNotes }),
 				el('a', { class: 'fpins-btn fpins-btn-primary', href: CONFIG.home + (CONFIG.home.indexOf('?') === -1 ? '?' : '&') + 'fpins=1', target: '_blank', rel: 'noopener', text: t('Review the site →') })
@@ -184,8 +184,10 @@
 
 		if (CONFIG.credit) {
 			wrap.appendChild(el('p', { class: 'fpins-credit' }, [
-				t('Feedback Pins, a free plugin by') + ' ',
-				el('a', { href: CONFIG.credit, target: '_blank', rel: 'noopener', text: 'AVANGARDISM' })
+				t('Feedback Pins, a free plugin by'),
+				el('a', { href: CONFIG.credit, target: '_blank', rel: 'noopener' }, [
+					el('img', { src: CONFIG.logo, width: '105', height: '24', alt: 'AVANGARDISM' })
+				])
 			]));
 		}
 	}
@@ -247,6 +249,8 @@
 	}
 
 	function move(id, status) {
+		var column = COLUMNS.filter(function (c) { return c.key === status; })[0];
+		if (column) F.announce(t('Moved to %s', column.title));
 		store.update(id, { status: status }).catch(failed('Could not move: %s'));
 	}
 
@@ -256,7 +260,7 @@
 	}
 
 	function answer(n) {
-		var field = el('textarea', { class: 'fpins-field', rows: '4', placeholder: t('e.g. fixed, live in 3 minutes · or: won’t fix, because…') });
+		var field = el('textarea', { class: 'fpins-field', rows: '4', 'aria-label': t('Answer the note'), placeholder: t('e.g. fixed, live in 3 minutes · or: won’t fix, because…') });
 		field.value = n.fixNote || '';
 		var d = F.dialog(t('Answer the note'), el('div', {}, [
 			el('p', { class: 'fpins-help', text: '“' + n.description.slice(0, 160) + (n.description.length > 160 ? '…' : '') + '”' }),
@@ -276,12 +280,12 @@
 			return;
 		}
 		var severity = 'major';
-		var text = el('textarea', { class: 'fpins-field', rows: '3', placeholder: t('e.g. align the spacing between the result cards') });
+		var text = el('textarea', { class: 'fpins-field', rows: '3', 'aria-label': t('Your note'), placeholder: t('e.g. align the spacing between the result cards') });
 		var page = el('input', { class: 'fpins-field', type: 'text', id: 'fpins-add-page', value: filters.page !== 'all' ? filters.page : '/', placeholder: '/' });
 		var section = el('input', { class: 'fpins-field', type: 'text', id: 'fpins-add-section', placeholder: t('e.g. Footer') });
-		var chips = el('div', { class: 'fpins-chips', role: 'radiogroup', 'aria-label': t('Severity') });
+		var chips = el('div', { class: 'fpins-chips', role: 'group', 'aria-label': t('Severity') });
 		F.SEVERITY_ORDER.forEach(function (s) {
-			var b = el('button', { type: 'button', role: 'radio', class: 'fpins-chip fpins-chip-' + s, text: F.severityLabel(s), onclick: function () { severity = s; update(); } });
+			var b = el('button', { type: 'button', class: 'fpins-chip fpins-chip-' + s, text: F.severityLabel(s), onclick: function () { severity = s; update(); } });
 			b.dataset.sev = s;
 			chips.appendChild(b);
 		});
@@ -289,7 +293,7 @@
 			Array.prototype.forEach.call(chips.children, function (b) {
 				var active = b.dataset.sev === severity;
 				b.classList.toggle('fpins-chip-active', active);
-				b.setAttribute('aria-checked', active ? 'true' : 'false');
+				b.setAttribute('aria-pressed', active ? 'true' : 'false');
 			});
 		}
 		update();
@@ -370,6 +374,7 @@
 			area.value = content();
 			Array.prototype.forEach.call(toggle.children, function (b) {
 				b.classList.toggle('fpins-chip-active', b.dataset.f === format);
+				b.setAttribute('aria-pressed', b.dataset.f === format ? 'true' : 'false');
 			});
 		}
 		[['markdown', 'Markdown'], ['json', 'JSON']].forEach(function (f) {

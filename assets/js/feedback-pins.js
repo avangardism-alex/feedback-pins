@@ -312,8 +312,9 @@
 
 	function dialog(title, content, footer) {
 		var backdrop = el('div', { class: 'fpins-backdrop', 'data-fpins': '' });
-		var box = el('div', { class: 'fpins-dialog', role: 'dialog', 'aria-modal': 'true', 'aria-label': title }, [
-			el('h2', { class: 'fpins-dialog-title', text: title }),
+		var titleId = 'fpins-dialog-' + Date.now();
+		var box = el('div', { class: 'fpins-dialog', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId }, [
+			el('h2', { class: 'fpins-dialog-title', id: titleId, text: title }),
 			content,
 			footer ? el('div', { class: 'fpins-dialog-footer' }, footer) : null
 		]);
@@ -327,6 +328,23 @@
 			if (e.key === 'Escape') {
 				e.stopPropagation();
 				close();
+				return;
+			}
+			// Keeps keyboard focus inside the dialog while it is open.
+			if (e.key === 'Tab') {
+				var items = Array.prototype.filter.call(box.querySelectorAll('button, [href], input, select, textarea'), function (n) {
+					return !n.disabled && n.offsetParent !== null;
+				});
+				if (!items.length) return;
+				var first = items[0];
+				var last = items[items.length - 1];
+				if (e.shiftKey && document.activeElement === first) {
+					e.preventDefault();
+					last.focus();
+				} else if (!e.shiftKey && (document.activeElement === last || !box.contains(document.activeElement))) {
+					e.preventDefault();
+					first.focus();
+				}
 			}
 		}
 		backdrop.addEventListener('mousedown', function (e) {
@@ -340,9 +358,27 @@
 		return { close: close, box: box };
 	}
 
+	/**
+	 * Reads a message to screen reader users. The live region exists before
+	 * the message is written into it, otherwise most readers stay silent.
+	 */
+	var liveRegion = null;
+
+	function announce(text) {
+		if (!liveRegion) {
+			liveRegion = el('div', { class: 'fpins-sr-only', role: 'status', 'aria-live': 'polite', 'data-fpins': '' });
+			document.body.appendChild(liveRegion);
+		}
+		liveRegion.textContent = '';
+		window.setTimeout(function () {
+			liveRegion.textContent = text;
+		}, 100);
+	}
+
 	function toast(text, isError) {
-		var m = el('div', { class: 'fpins-toast' + (isError ? ' fpins-toast-error' : ''), role: 'status', 'data-fpins': '', text: text });
+		var m = el('div', { class: 'fpins-toast' + (isError ? ' fpins-toast-error' : ''), 'aria-hidden': 'true', 'data-fpins': '', text: text });
 		document.body.appendChild(m);
+		announce(text);
 		window.setTimeout(function () {
 			m.remove();
 		}, isError ? 6000 : 3000);
@@ -402,6 +438,7 @@
 		t: t,
 		dialog: dialog,
 		toast: toast,
+		announce: announce,
 		identify: identify,
 		since: since,
 		isClosed: isClosed,
@@ -616,9 +653,9 @@
 
 		var layer = el('div', { class: 'fpins-layer', 'data-fpins': '' });
 		var hover = el('div', { class: 'fpins-hover', 'data-fpins': '' });
-		var banner = el('div', { class: 'fpins-banner', 'data-fpins': '', text: t('Click the element you want to comment on · Esc to cancel') });
+		var banner = el('div', { class: 'fpins-banner', 'data-fpins': '', text: t('Click the element you want to comment on, or reach it with Tab and press Enter · Esc to cancel') });
 		var counter = el('span', { class: 'fpins-counter' });
-		var syncDot = el('span', { class: 'fpins-sync', title: '' });
+		var syncDot = el('span', { class: 'fpins-sync', role: 'img', title: '' });
 		var addButton = el('button', { type: 'button', class: 'fpins-bar-add', text: t('+ Note') });
 		var panel = el('aside', { class: 'fpins-panel', 'data-fpins': '', 'aria-label': t('Notes on this page'), hidden: true });
 
@@ -705,6 +742,7 @@
 			counter.textContent = t('%d open', open.length);
 			syncDot.className = 'fpins-sync' + (st.ok ? '' : ' fpins-sync-ko');
 			syncDot.title = st.ok ? t('In sync with the team') : t('Sync failed: %s', st.message);
+			syncDot.setAttribute('aria-label', syncDot.title);
 
 			layer.textContent = '';
 			list.forEach(function (n, i) {
@@ -716,6 +754,7 @@
 					style: 'left:' + pos.x + 'px;top:' + pos.y + 'px',
 					title: (n.author ? n.author + ': ' : '') + n.description,
 					'aria-label': t('Note %d', i + 1),
+					'aria-expanded': openId === n.id ? 'true' : 'false',
 					text: String(i + 1),
 					onclick: function (e) {
 						e.stopPropagation();
@@ -808,7 +847,8 @@
 		function goTo(n) {
 			openId = n.id;
 			var pos = position(n);
-			if (pos) window.scrollTo({ top: Math.max(0, pos.y - window.innerHeight / 3), behavior: 'smooth' });
+			var smooth = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+			if (pos) window.scrollTo({ top: Math.max(0, pos.y - window.innerHeight / 3), behavior: smooth ? 'smooth' : 'auto' });
 			draw();
 		}
 
@@ -821,6 +861,7 @@
 			document.documentElement.classList.toggle('fpins-adding', on);
 			if (on) {
 				document.body.appendChild(banner);
+				announce(banner.textContent);
 				loadScreenshotLib().catch(function () {});
 			} else {
 				banner.remove();
@@ -856,27 +897,59 @@
 			if (!outsideTool(target)) return;
 			e.preventDefault();
 			e.stopPropagation();
+			pinOn(target, e.clientX, e.clientY);
+		}, true);
+
+		/**
+		 * Opens the note form for an element. Without a click point (keyboard),
+		 * the pin goes to the centre of the element.
+		 */
+		function pinOn(target, cx, cy) {
 			var r = target.getBoundingClientRect();
+			if (cx === null) {
+				cx = r.left + r.width / 2;
+				cy = r.top + r.height / 2;
+			}
 			setAddMode(false);
 			// The picture is taken right away, while the reviewer types.
-			var shot = screenshot(r, e.clientX, e.clientY);
+			var shot = screenshot(r, cx, cy);
 			shot.catch(function (err) {
 				console.warn('[feedback-pins] screenshot failed:', err.message);
 			});
 			compose(shot, {
 				selector: cssPath(target),
 				sectionLabel: sectionOf(target),
-				relX: r.width ? (e.clientX - r.left) / r.width : 0,
-				relY: r.height ? (e.clientY - r.top) / r.height : 0,
-				x: e.clientX + window.scrollX,
-				y: e.clientY,
+				relX: r.width ? (cx - r.left) / r.width : 0,
+				relY: r.height ? (cy - r.top) / r.height : 0,
+				x: cx + window.scrollX,
+				y: cy,
 				scrollY: window.scrollY
 			});
-		}, true);
+		}
 
 		window.addEventListener('keydown', function (e) {
 			if (e.key === 'Escape' && addMode) setAddMode(false);
+			else if (e.key === 'Escape' && openId) {
+				openId = null;
+				draw();
+			}
 		});
+
+		// Keyboard: in add mode, the frame follows the focus, and Enter pins a
+		// note on the focused element instead of activating it.
+		document.addEventListener('focusin', function (e) {
+			if (!addMode || !outsideTool(e.target) || e.target === document.body) return;
+			var r = e.target.getBoundingClientRect();
+			hover.style.cssText = 'display:block;top:' + r.top + 'px;left:' + r.left + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+		});
+
+		document.addEventListener('keydown', function (e) {
+			var target = document.activeElement;
+			if (!addMode || e.key !== 'Enter' || !target || target === document.body || !outsideTool(target)) return;
+			e.preventDefault();
+			e.stopPropagation();
+			pinOn(target, null, null);
+		}, true);
 
 		function compose(shot, anchor) {
 			var severity = 'major';
@@ -896,10 +969,10 @@
 				preview.textContent = '';
 				preview.appendChild(el('span', { class: 'fpins-meta', text: t('No screenshot on this page: the note will be located by its position.') }));
 			});
-			var text = el('textarea', { class: 'fpins-field', rows: '4', placeholder: t('e.g. the button is too small on mobile, the text should say…') });
-			var chips = el('div', { class: 'fpins-chips', role: 'radiogroup', 'aria-label': t('Severity') });
+			var text = el('textarea', { class: 'fpins-field', rows: '4', 'aria-label': t('Your note'), placeholder: t('e.g. the button is too small on mobile, the text should say…') });
+			var chips = el('div', { class: 'fpins-chips', role: 'group', 'aria-label': t('Severity') });
 			SEVERITY_ORDER.forEach(function (s) {
-				var b = el('button', { type: 'button', role: 'radio', class: 'fpins-chip fpins-chip-' + s, text: severityLabel(s), onclick: function () { severity = s; updateChips(); } });
+				var b = el('button', { type: 'button', class: 'fpins-chip fpins-chip-' + s, text: severityLabel(s), onclick: function () { severity = s; updateChips(); } });
 				b.dataset.sev = s;
 				chips.appendChild(b);
 			});
@@ -907,7 +980,7 @@
 				Array.prototype.forEach.call(chips.children, function (b) {
 					var active = b.dataset.sev === severity;
 					b.classList.toggle('fpins-chip-active', active);
-					b.setAttribute('aria-checked', active ? 'true' : 'false');
+					b.setAttribute('aria-pressed', active ? 'true' : 'false');
 				});
 			}
 			updateChips();

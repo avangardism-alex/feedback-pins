@@ -133,6 +133,7 @@ function fpins_config( $view ) {
 		$config['i18n']   = fpins_js_strings()['i18n'];
 		$config['labels'] = fpins_labels();
 		$config['credit'] = get_option( 'fpins_credit' ) ? esc_url_raw( fpins_avangardism_url( 'board-credit' ) ) : '';
+		$config['logo']   = esc_url_raw( FPINS_URL . 'assets/images/avangardism.svg' );
 	} else {
 		$config['script']  = esc_url_raw( fpins_asset_url( 'js/feedback-pins.js' ) );
 		$config['strings'] = esc_url_raw( rest_url( FPINS_REST_NS . '/strings' ) );
@@ -230,7 +231,7 @@ function fpins_board( $wp ) {
 	<?php wp_print_styles( array( 'feedback-pins' ) ); ?>
 </head>
 <body class="fpins-page">
-	<div id="fpins-board"></div>
+	<main id="fpins-board"></main>
 	<?php wp_print_scripts( array( 'feedback-pins-board' ) ); ?>
 </body>
 </html>
@@ -318,7 +319,7 @@ function fpins_js_strings() {
 		'Board' => _x( 'Board', 'Noun, link to the feedback board.', 'feedback-pins' ),
 		'Both fields are required.' => __( 'Both fields are required.', 'feedback-pins' ),
 		'Cancel' => __( 'Cancel', 'feedback-pins' ),
-		'Click the element you want to comment on · Esc to cancel' => __( 'Click the element you want to comment on · Esc to cancel', 'feedback-pins' ),
+		'Click the element you want to comment on, or reach it with Tab and press Enter · Esc to cancel' => __( 'Click the element you want to comment on, or reach it with Tab and press Enter · Esc to cancel', 'feedback-pins' ),
 		'Click “Sign in” and enter the key that came with your review link.' => __( 'Click “Sign in” and enter the key that came with your review link.', 'feedback-pins' ),
 		'Close' => __( 'Close', 'feedback-pins' ),
 		'Close the list' => __( 'Close the list', 'feedback-pins' ),
@@ -365,6 +366,8 @@ function fpins_js_strings() {
 		'Leave review mode' => __( 'Leave review mode', 'feedback-pins' ),
 		'List' => _x( 'List', 'Noun, button that opens the list of notes.', 'feedback-pins' ),
 		'Mark as fixed' => __( 'Mark as fixed', 'feedback-pins' ),
+		/* translators: %s: column name, e.g. "In progress". */
+		'Moved to %s' => __( 'Moved to %s', 'feedback-pins' ),
 		'Missing review key.' => __( 'Missing review key.', 'feedback-pins' ),
 		/* translators: column name, e.g. "In progress". */
 		'Move to %s' => __( 'Move to %s', 'feedback-pins' ),
@@ -412,6 +415,7 @@ function fpins_js_strings() {
 		/* translators: reviewer first name. */
 		'You are %s' => __( 'You are %s', 'feedback-pins' ),
 		'Your first name' => __( 'Your first name', 'feedback-pins' ),
+		'Your note' => __( 'Your note', 'feedback-pins' ),
 		'Your first name signs your notes, so the team knows who spotted what. The key came with your review link.' => __( 'Your first name signs your notes, so the team knows who spotted what. The key came with your review link.', 'feedback-pins' ),
 		'answer' => _x( 'answer', 'Noun, label in the Markdown export.', 'feedback-pins' ),
 		'e.g. Camille' => __( 'e.g. Camille', 'feedback-pins' ),
