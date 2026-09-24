@@ -1,4 +1,4 @@
-=== Feedback Pins ===
+=== Feedback Pins – QA & Client Feedback ===
 Contributors: avangardism
 Tags: feedback, client review, annotation, qa, bug report
 Requires at least: 6.3

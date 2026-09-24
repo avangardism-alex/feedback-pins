@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Feedback Pins
+ * Plugin Name:       Feedback Pins – QA & Client Feedback
  * Plugin URI:        https://github.com/avangardism-alex/feedback-pins
  * Description:       Pin feedback right on your pages. Clients click any element, write a note, and the whole team sees it on a shared board, with screenshots, Slack notifications and a Markdown export. Free, no account, everything stays in your WordPress.
  * Version:           1.0.0

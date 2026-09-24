@@ -187,6 +187,12 @@ CSS;
 
 	$js = <<<'JS'
 document.addEventListener('click', function (e) {
+	var ask = e.target.closest('[data-fpins-confirm]');
+	if (ask && !window.confirm(ask.getAttribute('data-fpins-confirm'))) {
+		e.preventDefault();
+		return;
+	}
+	if (e.target.matches('.fpins-copy input')) e.target.select();
 	var b = e.target.closest('[data-fpins-copy]');
 	if (!b) return;
 	var field = document.getElementById(b.getAttribute('data-fpins-copy'));
@@ -219,7 +225,7 @@ add_action( 'admin_enqueue_scripts', 'fpins_admin_assets' );
 function fpins_copy_field( $id, $value, $label ) {
 	?>
 	<div class="fpins-copy">
-		<input type="text" id="<?php echo esc_attr( $id ); ?>" class="regular-text" readonly value="<?php echo esc_attr( $value ); ?>" aria-label="<?php echo esc_attr( $label ); ?>" onclick="this.select()">
+		<input type="text" id="<?php echo esc_attr( $id ); ?>" class="regular-text" readonly value="<?php echo esc_attr( $value ); ?>" aria-label="<?php echo esc_attr( $label ); ?>">
 		<button type="button" class="button" data-fpins-copy="<?php echo esc_attr( $id ); ?>" data-done="<?php esc_attr_e( 'Copied!', 'feedback-pins' ); ?>"><?php esc_html_e( 'Copy', 'feedback-pins' ); ?></button>
 	</div>
 	<?php
@@ -309,7 +315,7 @@ function fpins_admin_page() {
 						<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 							<input type="hidden" name="action" value="fpins_regenerate">
 							<?php wp_nonce_field( 'fpins_regenerate' ); ?>
-							<?php submit_button( __( 'Generate a new key', 'feedback-pins' ), 'secondary', 'submit', false, array( 'onclick' => 'return confirm(' . wp_json_encode( __( 'Links already sent will stop working. Continue?', 'feedback-pins' ) ) . ')' ) ); ?>
+							<?php submit_button( __( 'Generate a new key', 'feedback-pins' ), 'secondary', 'submit', false, array( 'data-fpins-confirm' => __( 'Links already sent will stop working. Continue?', 'feedback-pins' ) ) ); ?>
 						</form>
 					<?php endif; ?>
 				</div>

@@ -2,25 +2,21 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Feedback Pins 1.0.0\n"
+"Project-Id-Version: Feedback Pins – QA & Client Feedback 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/avangardism-alex/feedback-pins/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-24T08:48:25+00:00\n"
+"POT-Creation-Date: 2026-09-24T09:41:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: feedback-pins\n"
 
 #. Plugin Name of the plugin
 #: feedback-pins.php
-#: includes/admin.php:20
-#: includes/admin.php:21
-#: includes/admin.php:262
-#: includes/front.php:351
-msgid "Feedback Pins"
+msgid "Feedback Pins – QA & Client Feedback"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -43,8 +39,15 @@ msgstr ""
 msgid "https://avangardism.com/?utm_source=feedback-pins&utm_medium=plugin&utm_campaign=plugin-header"
 msgstr ""
 
+#: includes/admin.php:20
+#: includes/admin.php:21
+#: includes/admin.php:268
+#: includes/front.php:352
+msgid "Feedback Pins"
+msgstr ""
+
 #: includes/admin.php:46
-#: includes/front.php:287
+#: includes/front.php:288
 msgid "Settings"
 msgstr ""
 
@@ -68,203 +71,203 @@ msgstr ""
 msgid "Test"
 msgstr ""
 
-#: includes/admin.php:223
+#: includes/admin.php:229
 msgid "Copied!"
 msgstr ""
 
-#: includes/admin.php:223
-#: includes/front.php:328
+#: includes/admin.php:229
+#: includes/front.php:329
 msgid "Copy"
 msgstr ""
 
-#: includes/admin.php:238
+#: includes/admin.php:244
 msgid "New key generated. Links sent before no longer work: send the new link below."
 msgstr ""
 
-#: includes/admin.php:239
+#: includes/admin.php:245
 msgid "Slack setting saved."
 msgstr ""
 
-#: includes/admin.php:240
+#: includes/admin.php:246
 msgid "Test message sent: check your Slack channel."
 msgstr ""
 
-#: includes/admin.php:241
+#: includes/admin.php:247
 msgid "This is not a Slack webhook URL (it must start with https://hooks.slack.com/)."
 msgstr ""
 
 #. translators: %s: error returned by Slack.
-#: includes/admin.php:243
+#: includes/admin.php:249
 #, php-format
 msgid "Slack refused the message: %s"
 msgstr ""
 
-#: includes/admin.php:244
+#: includes/admin.php:250
 msgid "Settings saved."
 msgstr ""
 
-#: includes/admin.php:263
+#: includes/admin.php:269
 msgid "Your clients pin their feedback right on the pages. Your team sees it all, live, on one board."
 msgstr ""
 
-#: includes/admin.php:273
+#: includes/admin.php:279
 msgid "Invite your reviewers"
 msgstr ""
 
 #. translators: %d: number of notes.
-#: includes/admin.php:277
+#: includes/admin.php:283
 #, php-format
 msgid "%d note"
 msgid_plural "%d notes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin.php:281
+#: includes/admin.php:287
 msgid "Send this link to your client, your project manager, your team. Anyone who opens it can pin notes on any page and sees everyone else’s notes."
 msgstr ""
 
-#: includes/admin.php:282
+#: includes/admin.php:288
 msgid "Invitation link"
 msgstr ""
 
-#: includes/admin.php:284
+#: includes/admin.php:290
 msgid "The link turns on the review toolbar and stores the key in the browser. The key is then removed from the address bar."
 msgstr ""
 
-#: includes/admin.php:285
+#: includes/admin.php:291
 msgid "On first use, the reviewer types a first name to sign the notes."
 msgstr ""
 
-#: includes/admin.php:286
+#: includes/admin.php:292
 msgid "“+ Note”, click the element, write, save: a screenshot is attached and a numbered pin stays on the element."
 msgstr ""
 
-#: includes/admin.php:291
-#: includes/front.php:353
+#: includes/admin.php:297
+#: includes/front.php:354
 msgid "Feedback board"
 msgstr ""
 
-#: includes/admin.php:292
+#: includes/admin.php:298
 msgid "Every note in three columns (To do, In progress, Done), with filters, drag and drop, answers and a Markdown or JSON export."
 msgstr ""
 
-#: includes/admin.php:293
+#: includes/admin.php:299
 msgid "Board link"
 msgstr ""
 
-#: includes/admin.php:294
-#: includes/front.php:279
+#: includes/admin.php:300
+#: includes/front.php:280
 #: includes/slack.php:154
 msgid "Open the board"
 msgstr ""
 
-#: includes/admin.php:298
-#: includes/front.php:388
+#: includes/admin.php:304
+#: includes/front.php:389
 msgid "Review key"
 msgstr ""
 
-#: includes/admin.php:299
+#: includes/admin.php:305
 msgid "Nobody can read or write notes without this key. It is already included in the links above."
 msgstr ""
 
 #. translators: 1: constant name, 2: file name.
-#: includes/admin.php:305
-#: includes/admin.php:327
+#: includes/admin.php:311
+#: includes/admin.php:333
 #, php-format
 msgid "Set by the %1$s constant in %2$s."
 msgstr ""
 
-#: includes/admin.php:312
+#: includes/admin.php:318
 msgid "Generate a new key"
 msgstr ""
 
-#: includes/admin.php:312
+#: includes/admin.php:318
 msgid "Links already sent will stop working. Continue?"
 msgstr ""
 
-#: includes/admin.php:318
+#: includes/admin.php:324
 msgid "Slack notifications"
 msgstr ""
 
-#: includes/admin.php:320
+#: includes/admin.php:326
 msgid "Every new note is posted to a channel, with its screenshot and a direct link to the spot on the page. The message is sent by your own server, straight to Slack: nothing goes through a third party."
 msgstr ""
 
-#: includes/admin.php:321
+#: includes/admin.php:327
 msgid "How to get a webhook URL"
 msgstr ""
 
-#: includes/admin.php:334
+#: includes/admin.php:340
 msgid "Slack webhook URL"
 msgstr ""
 
-#: includes/admin.php:336
+#: includes/admin.php:342
 msgid "Leave empty to turn notifications off."
 msgstr ""
 
-#: includes/admin.php:338
-#: includes/admin.php:363
-#: includes/front.php:390
+#: includes/admin.php:344
+#: includes/admin.php:369
+#: includes/front.php:391
 msgid "Save"
 msgstr ""
 
-#: includes/admin.php:339
+#: includes/admin.php:345
 msgid "Save and send a test"
 msgstr ""
 
-#: includes/admin.php:346
+#: includes/admin.php:352
 msgid "Good to know"
 msgstr ""
 
-#: includes/admin.php:348
+#: includes/admin.php:354
 msgid "Visitors who never opened a review link only download a few hundred bytes: the toolbar is loaded on demand."
 msgstr ""
 
-#: includes/admin.php:349
+#: includes/admin.php:355
 msgid "Screenshots are stored in uploads/feedback-pins/ under random names, and deleted with their note."
 msgstr ""
 
-#: includes/admin.php:351
+#: includes/admin.php:357
 msgid "See the raw notes in the admin"
 msgstr ""
 
-#: includes/admin.php:360
+#: includes/admin.php:366
 msgid "Show a small “made by AVANGARDISM” credit at the bottom of the board. Off by default, it helps us keep the plugin free."
 msgstr ""
 
-#: includes/admin.php:371
+#: includes/admin.php:377
 msgid "Free, for good"
 msgstr ""
 
-#: includes/admin.php:372
+#: includes/admin.php:378
 msgid "Feedback Pins is the review tool we use with our own clients. We share it for free: no account, no premium version, your data stays in your WordPress."
 msgstr ""
 
-#: includes/admin.php:373
+#: includes/admin.php:379
 msgid "AVANGARDISM is a web agency: websites, e-commerce, business software and UX/UI design, with a user-first approach."
 msgstr ""
 
-#: includes/admin.php:374
+#: includes/admin.php:380
 msgid "Talk about your project"
 msgstr ""
 
-#: includes/admin.php:378
+#: includes/admin.php:384
 msgid "Help the project"
 msgstr ""
 
-#: includes/admin.php:379
+#: includes/admin.php:385
 msgid "A bug, an idea? The code is open."
 msgstr ""
 
-#: includes/admin.php:381
+#: includes/admin.php:387
 msgid "Report an issue"
 msgstr ""
 
-#: includes/admin.php:382
+#: includes/admin.php:388
 msgid "Star it on GitHub"
 msgstr ""
 
-#: includes/admin.php:383
+#: includes/admin.php:389
 msgid "Leave a review on WordPress.org"
 msgstr ""
 
@@ -274,479 +277,479 @@ msgstr ""
 msgid "Feedback board · %s"
 msgstr ""
 
-#: includes/front.php:262
+#: includes/front.php:263
 msgid "Feedback"
 msgstr ""
 
-#: includes/front.php:264
+#: includes/front.php:265
 msgid "Pin feedback on this page"
 msgstr ""
 
-#: includes/front.php:271
+#: includes/front.php:272
 msgid "Review this page"
 msgstr ""
 
 #. translators: 1: number of notes to do, 2: in progress, 3: done.
-#: includes/front.php:305
+#: includes/front.php:306
 #, php-format
 msgid "%1$d to do · %2$d in progress · %3$d done."
 msgstr ""
 
 #. translators: number of open notes on the page.
-#: includes/front.php:307
+#: includes/front.php:308
 #, php-format
 msgid "%d open"
 msgstr ""
 
-#: includes/front.php:308
+#: includes/front.php:309
 msgid "(no section)"
 msgstr ""
 
-#: includes/front.php:309
+#: includes/front.php:310
 msgid "+ Note"
 msgstr ""
 
-#: includes/front.php:310
+#: includes/front.php:311
 msgid "Add"
 msgstr ""
 
-#: includes/front.php:311
+#: includes/front.php:312
 msgid "Add a note"
 msgstr ""
 
-#: includes/front.php:312
+#: includes/front.php:313
 msgid "Add or edit an answer"
 msgstr ""
 
-#: includes/front.php:313
+#: includes/front.php:314
 msgid "All pages"
 msgstr ""
 
-#: includes/front.php:314
+#: includes/front.php:315
 msgid "All severities"
 msgstr ""
 
-#: includes/front.php:315
+#: includes/front.php:316
 #: includes/slack.php:88
 msgid "Anonymous"
 msgstr ""
 
-#: includes/front.php:316
+#: includes/front.php:317
 msgctxt "Verb, button label."
 msgid "Answer"
 msgstr ""
 
-#: includes/front.php:317
+#: includes/front.php:318
 msgid "Answer the note"
 msgstr ""
 
-#: includes/front.php:318
+#: includes/front.php:319
 msgid "Answer:"
 msgstr ""
 
-#: includes/front.php:319
+#: includes/front.php:320
 msgctxt "Noun, link to the feedback board."
 msgid "Board"
 msgstr ""
 
-#: includes/front.php:320
+#: includes/front.php:321
 msgid "Both fields are required."
 msgstr ""
 
-#: includes/front.php:321
+#: includes/front.php:322
 msgid "Cancel"
 msgstr ""
 
-#: includes/front.php:322
+#: includes/front.php:323
 msgid "Click the element you want to comment on, or reach it with Tab and press Enter · Esc to cancel"
 msgstr ""
 
-#: includes/front.php:323
+#: includes/front.php:324
 msgid "Click “Sign in” and enter the key that came with your review link."
 msgstr ""
 
-#: includes/front.php:324
+#: includes/front.php:325
 msgid "Close"
 msgstr ""
 
-#: includes/front.php:325
+#: includes/front.php:326
 msgid "Close the list"
 msgstr ""
 
-#: includes/front.php:326
+#: includes/front.php:327
 msgid "Continue"
 msgstr ""
 
-#: includes/front.php:327
+#: includes/front.php:328
 msgid "Copied."
 msgstr ""
 
 #. translators: error message.
-#: includes/front.php:330
+#: includes/front.php:331
 #, php-format
 msgid "Could not add: %s"
 msgstr ""
 
 #. translators: error message.
-#: includes/front.php:332
+#: includes/front.php:333
 #, php-format
 msgid "Could not delete: %s"
 msgstr ""
 
 #. translators: error message.
-#: includes/front.php:334
+#: includes/front.php:335
 #, php-format
 msgid "Could not move: %s"
 msgstr ""
 
 #. translators: error message.
-#: includes/front.php:336
+#: includes/front.php:337
 #, php-format
 msgid "Could not save: %s"
 msgstr ""
 
 #. translators: error message.
-#: includes/front.php:338
+#: includes/front.php:339
 #, php-format
 msgid "Could not update: %s"
 msgstr ""
 
-#: includes/front.php:339
+#: includes/front.php:340
 msgid "Delete"
 msgstr ""
 
-#: includes/front.php:340
+#: includes/front.php:341
 msgid "Delete the note"
 msgstr ""
 
-#: includes/front.php:341
+#: includes/front.php:342
 msgid "Delete this note for the whole team?"
 msgstr ""
 
-#: includes/front.php:342
+#: includes/front.php:343
 msgid "Do not attach"
 msgstr ""
 
-#: includes/front.php:343
+#: includes/front.php:344
 msgid "Done"
 msgstr ""
 
-#: includes/front.php:344
+#: includes/front.php:345
 msgid "Download"
 msgstr ""
 
-#: includes/front.php:345
+#: includes/front.php:346
 msgid "Edit the answer"
 msgstr ""
 
-#: includes/front.php:346
+#: includes/front.php:347
 msgid "Enlarge the screenshot"
 msgstr ""
 
-#: includes/front.php:347
+#: includes/front.php:348
 msgid "Everyone"
 msgstr ""
 
-#: includes/front.php:348
+#: includes/front.php:349
 msgid "Export"
 msgstr ""
 
 #. translators: number of notes.
-#: includes/front.php:350
+#: includes/front.php:351
 #, php-format
 msgid "Export %d note(s)"
 msgstr ""
 
-#: includes/front.php:352
+#: includes/front.php:353
 msgid "Feedback Pins, a free plugin by"
 msgstr ""
 
 #. translators: number of notes.
-#: includes/front.php:355
+#: includes/front.php:356
 #, php-format
 msgid "Feedback · %d note(s)"
 msgstr ""
 
-#: includes/front.php:356
+#: includes/front.php:357
 msgid "Filter by page"
 msgstr ""
 
-#: includes/front.php:357
+#: includes/front.php:358
 msgid "Filter by person"
 msgstr ""
 
-#: includes/front.php:358
+#: includes/front.php:359
 msgid "Filter by severity"
 msgstr ""
 
-#: includes/front.php:359
+#: includes/front.php:360
 msgid "Follows the current filters. Grouped by page then section: paste it as is into a ticket or an AI assistant."
 msgstr ""
 
-#: includes/front.php:360
+#: includes/front.php:361
 msgid "Footer"
 msgstr ""
 
-#: includes/front.php:361
+#: includes/front.php:362
 msgid "Header"
 msgstr ""
 
-#: includes/front.php:362
+#: includes/front.php:363
 #: includes/notes.php:61
 msgid "In progress"
 msgstr ""
 
-#: includes/front.php:363
+#: includes/front.php:364
 msgid "In sync with the team"
 msgstr ""
 
 #. translators: error message.
-#: includes/front.php:365
+#: includes/front.php:366
 #, php-format
 msgid "Key refused: %s"
 msgstr ""
 
-#: includes/front.php:366
+#: includes/front.php:367
 msgid "Leave review mode"
 msgstr ""
 
-#: includes/front.php:367
+#: includes/front.php:368
 msgctxt "Noun, button that opens the list of notes."
 msgid "List"
 msgstr ""
 
-#: includes/front.php:368
+#: includes/front.php:369
 msgid "Mark as fixed"
 msgstr ""
 
 #. translators: %s: column name, e.g. "In progress".
-#: includes/front.php:370
+#: includes/front.php:371
 #, php-format
 msgid "Moved to %s"
 msgstr ""
 
-#: includes/front.php:371
+#: includes/front.php:372
 msgid "Missing review key."
 msgstr ""
 
 #. translators: column name, e.g. "In progress".
-#: includes/front.php:373
+#: includes/front.php:374
 #, php-format
 msgid "Move to %s"
 msgstr ""
 
-#: includes/front.php:374
+#: includes/front.php:375
 msgid "New note"
 msgstr ""
 
-#: includes/front.php:375
+#: includes/front.php:376
 msgid "New “To do” note"
 msgstr ""
 
-#: includes/front.php:376
+#: includes/front.php:377
 msgid "No open note on this page. Click “+ Note” to add one."
 msgstr ""
 
-#: includes/front.php:377
+#: includes/front.php:378
 msgid "No screenshot on this page: the note will be located by its position."
 msgstr ""
 
 #. translators: pin number.
-#: includes/front.php:379
+#: includes/front.php:380
 #, php-format
 msgid "Note %d"
 msgstr ""
 
-#: includes/front.php:380
+#: includes/front.php:381
 msgid "Note saved, the whole team can see it."
 msgstr ""
 
-#: includes/front.php:381
+#: includes/front.php:382
 msgid "Notes are shared: what one person pins shows up for everyone else, without reloading."
 msgstr ""
 
-#: includes/front.php:382
+#: includes/front.php:383
 msgid "Notes on this page"
 msgstr ""
 
-#: includes/front.php:383
+#: includes/front.php:384
 msgid "Nothing to do. Add a note (+) or pin one right on the site."
 msgstr ""
 
-#: includes/front.php:384
+#: includes/front.php:385
 msgid "Open the page at this spot"
 msgstr ""
 
-#: includes/front.php:385
+#: includes/front.php:386
 msgid "Page (path)"
 msgstr ""
 
-#: includes/front.php:386
+#: includes/front.php:387
 msgid "Pin number on the page"
 msgstr ""
 
-#: includes/front.php:387
+#: includes/front.php:388
 msgid "Reopen"
 msgstr ""
 
-#: includes/front.php:389
+#: includes/front.php:390
 msgid "Review the site →"
 msgstr ""
 
-#: includes/front.php:391
+#: includes/front.php:392
 msgid "Screenshot attached to the note"
 msgstr ""
 
 #. translators: pin number.
-#: includes/front.php:393
+#: includes/front.php:394
 #, php-format
 msgid "Screenshot of note #%d"
 msgstr ""
 
-#: includes/front.php:394
+#: includes/front.php:395
 msgid "Screenshot removed."
 msgstr ""
 
-#: includes/front.php:395
+#: includes/front.php:396
 #: includes/slack.php:135
 msgid "Screenshot taken with the note"
 msgstr ""
 
-#: includes/front.php:396
+#: includes/front.php:397
 msgid "Screenshot…"
 msgstr ""
 
-#: includes/front.php:397
+#: includes/front.php:398
 msgid "Section (optional)"
 msgstr ""
 
 #. translators: section name, e.g. "Footer".
-#: includes/front.php:399
+#: includes/front.php:400
 #, php-format
 msgid "Section: %s"
 msgstr ""
 
-#: includes/front.php:400
+#: includes/front.php:401
 msgid "Sending…"
 msgstr ""
 
-#: includes/front.php:401
+#: includes/front.php:402
 msgid "Severity"
 msgstr ""
 
 #. translators: number of closed notes.
-#: includes/front.php:403
+#: includes/front.php:404
 #, php-format
 msgid "Show %d closed note(s)"
 msgstr ""
 
-#: includes/front.php:404
+#: includes/front.php:405
 msgid "Sign in"
 msgstr ""
 
 #. translators: reviewer first name.
-#: includes/front.php:406
+#: includes/front.php:407
 #, php-format
 msgid "Signed “%s”. ⌘/Ctrl + Enter to save."
 msgstr ""
 
 #. translators: error message.
-#: includes/front.php:408
+#: includes/front.php:409
 #, php-format
 msgid "Sync failed: %s"
 msgstr ""
 
-#: includes/front.php:409
+#: includes/front.php:410
 msgid "Taking a screenshot…"
 msgstr ""
 
-#: includes/front.php:410
+#: includes/front.php:411
 msgid "The browser refused to copy: the text is selected, press ⌘/Ctrl + C."
 msgstr ""
 
-#: includes/front.php:411
+#: includes/front.php:412
 msgid "This note has been deleted in the meantime."
 msgstr ""
 
-#: includes/front.php:412
+#: includes/front.php:413
 #: includes/notes.php:60
 msgid "To do"
 msgstr ""
 
-#: includes/front.php:413
+#: includes/front.php:414
 msgid "View on the page →"
 msgstr ""
 
-#: includes/front.php:414
+#: includes/front.php:415
 msgid "Who is reviewing?"
 msgstr ""
 
 #. translators: reviewer first name.
-#: includes/front.php:416
+#: includes/front.php:417
 #, php-format
 msgid "You are %s"
 msgstr ""
 
-#: includes/front.php:417
+#: includes/front.php:418
 msgid "Your first name"
 msgstr ""
 
-#: includes/front.php:418
+#: includes/front.php:419
 msgid "Your note"
 msgstr ""
 
-#: includes/front.php:419
+#: includes/front.php:420
 msgid "Your first name signs your notes, so the team knows who spotted what. The key came with your review link."
 msgstr ""
 
-#: includes/front.php:420
+#: includes/front.php:421
 msgctxt "Noun, label in the Markdown export."
 msgid "answer"
 msgstr ""
 
-#: includes/front.php:421
+#: includes/front.php:422
 msgid "e.g. Camille"
 msgstr ""
 
-#: includes/front.php:422
+#: includes/front.php:423
 msgid "e.g. Footer"
 msgstr ""
 
-#: includes/front.php:423
+#: includes/front.php:424
 msgid "e.g. align the spacing between the result cards"
 msgstr ""
 
-#: includes/front.php:424
+#: includes/front.php:425
 msgid "e.g. fixed, live in 3 minutes · or: won’t fix, because…"
 msgstr ""
 
-#: includes/front.php:425
+#: includes/front.php:426
 msgid "e.g. the button is too small on mobile, the text should say…"
 msgstr ""
 
 #. translators: export date.
-#: includes/front.php:427
+#: includes/front.php:428
 #, php-format
 msgid "exported %s"
 msgstr ""
 
 #. translators: pin number.
-#: includes/front.php:429
+#: includes/front.php:430
 #, php-format
 msgid "pin #%d"
 msgstr ""
 
-#: includes/front.php:430
+#: includes/front.php:431
 msgctxt "Noun, label in the Markdown export."
 msgid "screen"
 msgstr ""
 
-#: includes/front.php:431
+#: includes/front.php:432
 msgctxt "Noun, label in the Markdown export."
 msgid "screenshot"
 msgstr ""
 
-#: includes/front.php:432
+#: includes/front.php:433
 msgctxt "Noun, CSS selector label in the Markdown export."
 msgid "selector"
 msgstr ""

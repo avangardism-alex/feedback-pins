@@ -252,8 +252,9 @@ function fpins_admin_bar( $bar ) {
 
 	$current = home_url( '/' );
 
-	if ( ! is_admin() && isset( $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'] ) ) {
-		$current = esc_url_raw( set_url_scheme( 'http://' . wp_unslash( $_SERVER['HTTP_HOST'] ) . wp_unslash( $_SERVER['REQUEST_URI'] ) ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	// The host comes from the site settings, never from the request headers.
+	if ( ! is_admin() && isset( $_SERVER['REQUEST_URI'] ) ) {
+		$current = esc_url_raw( fpins_page_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) );
 	}
 
 	$bar->add_node(
