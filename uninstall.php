@@ -5,7 +5,7 @@
  * Runs only when the plugin is deleted from the Plugins screen, not when it is
  * deactivated.
  *
- * @package FeedbackPins
+ * @package Pinora
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
@@ -13,10 +13,10 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 /**
  * Cleans the current site.
  */
-function fpins_uninstall_site() {
+function pinora_uninstall_site() {
 	$ids = get_posts(
 		array(
-			'post_type'        => 'fpins_note',
+			'post_type'        => 'pinora_note',
 			'post_status'      => 'any',
 			'posts_per_page'   => -1,
 			'fields'           => 'ids',
@@ -27,12 +27,12 @@ function fpins_uninstall_site() {
 		wp_delete_post( $id, true );
 	}
 
-	foreach ( array( 'fpins_key', 'fpins_slack_webhook', 'fpins_credit' ) as $option ) {
+	foreach ( array( 'pinora_key', 'pinora_slack_webhook', 'pinora_credit' ) as $option ) {
 		delete_option( $option );
 	}
 
 	$uploads = wp_upload_dir( null, false );
-	$dir     = trailingslashit( $uploads['basedir'] ) . 'feedback-pins';
+	$dir     = trailingslashit( $uploads['basedir'] ) . 'pinora';
 
 	if ( is_dir( $dir ) ) {
 		foreach ( (array) glob( $dir . '/*' ) as $file ) {
@@ -43,11 +43,11 @@ function fpins_uninstall_site() {
 }
 
 if ( is_multisite() ) {
-	foreach ( get_sites( array( 'fields' => 'ids' ) ) as $fpins_site_id ) {
-		switch_to_blog( $fpins_site_id );
-		fpins_uninstall_site();
+	foreach ( get_sites( array( 'fields' => 'ids' ) ) as $pinora_site_id ) {
+		switch_to_blog( $pinora_site_id );
+		pinora_uninstall_site();
 		restore_current_blog();
 	}
 } else {
-	fpins_uninstall_site();
+	pinora_uninstall_site();
 }

@@ -1,20 +1,20 @@
-# Feedback Pins
+# Pinora
 
 [Français](README.fr.md) · **English**
 
-![Feedback Pins](.wordpress-org/banner-1544x500.png)
+![Pinora](.wordpress-org/banner-1544x500.png)
 
 **Your clients pin feedback right on the page. Your team sees it all, live, on one board.**
 
-A free WordPress plugin by [AVANGARDISM](https://avangardism.com/?utm_source=github&utm_medium=readme&utm_campaign=feedback-pins). No account, no SaaS, no premium version: notes and screenshots stay in your own WordPress.
+A free WordPress plugin by [AVANGARDISM](https://avangardism.com/?utm_source=github&utm_medium=readme&utm_campaign=pinora). No account, no SaaS, no premium version: notes and screenshots stay in your own WordPress.
 
 ---
 
 ## Why
 
-Website feedback usually arrives as a pile of emails with blurry screenshots and "the button on the page, you know, the blue one". Feedback Pins puts every remark exactly where it belongs: on the element itself.
+Website feedback usually arrives as a pile of emails with blurry screenshots and "the button on the page, you know, the blue one". Pinora puts every remark exactly where it belongs: on the element itself.
 
-1. Send your client the invitation link from **Tools > Feedback Pins**.
+1. Send your client the invitation link from **Tools > Pinora**.
 2. They click **+ Note**, click any element, type, save.
 3. A screenshot is attached, a numbered pin stays on the element.
 4. Everyone who opened the link sees everyone else's notes within 15 seconds, on the page and on the board.
@@ -41,7 +41,7 @@ Website feedback usually arrives as a pile of emails with blurry screenshots and
 
 ## Install
 
-**From WordPress.org** (once published): *Plugins > Add New*, search for "Feedback Pins".
+**From WordPress.org** (once published): *Plugins > Add New*, search for "Pinora".
 
 **From GitHub**: download the zip of the [latest release](https://github.com/avangardism-alex/feedback-pins/releases/latest), then *Plugins > Add New > Upload Plugin*.
 
@@ -54,7 +54,7 @@ On your server. When a note is created, your WordPress calls your Slack incoming
 ## Security model
 
 - A shared key protects the notes. Without it, the REST API answers 401 for reading as well as writing.
-- The key travels in the URL fragment (`#fpins_key=…`), never sent to the server nor to analytics, and is removed from the address bar on arrival. Afterwards it goes in the `X-Feedback-Pins-Key` header.
+- The key travels in the URL fragment (`#pinora_key=…`), never sent to the server nor to analytics, and is removed from the address bar on arrival. Afterwards it goes in the `X-Pinora-Key` header.
 - Regenerating the key in the settings disables every link sent before.
 - Notes are plain text, always rendered with `textContent` in the browser and `esc_*` in PHP.
 - Screenshots are checked to be real JPEG/PNG images, capped at 3 MB, and stored under random names.
@@ -64,34 +64,34 @@ On your server. When a note is created, your WordPress calls your Slack incoming
 Constants (in `wp-config.php`):
 
 ```php
-define( 'FPINS_KEY', 'your-own-key' );                              // fixed key
-define( 'FPINS_SLACK_WEBHOOK', 'https://hooks.slack.com/services/…' ); // webhook out of the database
+define( 'PINORA_KEY', 'your-own-key' );                              // fixed key
+define( 'PINORA_SLACK_WEBHOOK', 'https://hooks.slack.com/services/…' ); // webhook out of the database
 ```
 
 Filters and actions:
 
 | Hook | Default | Purpose |
 |---|---|---|
-| `fpins_board_path` | `feedback-board` | Path of the board |
-| `fpins_capability` | `manage_options` | Who sees the settings and the toolbar shortcut |
-| `fpins_sync_interval` | `15000` | Reload interval in ms (minimum 5000) |
-| `fpins_notes_limit` | `1000` | Maximum notes returned |
-| `fpins_note` | | Filter a note before it reaches the browser or Slack |
-| `fpins_slack_message` | | Filter the Slack Block Kit payload |
-| `fpins_note_created` (action) | | Fires after a note is created: plug email, Teams, Discord… |
+| `pinora_board_path` | `feedback-board` | Path of the board |
+| `pinora_capability` | `manage_options` | Who sees the settings and the toolbar shortcut |
+| `pinora_sync_interval` | `15000` | Reload interval in ms (minimum 5000) |
+| `pinora_notes_limit` | `1000` | Maximum notes returned |
+| `pinora_note` | | Filter a note before it reaches the browser or Slack |
+| `pinora_slack_message` | | Filter the Slack Block Kit payload |
+| `pinora_note_created` (action) | | Fires after a note is created: plug email, Teams, Discord… |
 
-REST routes under `/wp-json/feedback-pins/v1/`: `GET|POST notes`, `POST|DELETE notes/{id}`, `GET strings`.
+REST routes under `/wp-json/pinora/v1/`: `GET|POST notes`, `POST|DELETE notes/{id}`, `GET strings`.
 
 ### Project layout
 
 ```
-feedback-pins.php      bootstrap
+pinora.php      bootstrap
 includes/notes.php     post type, fields, sanitising, key
 includes/rest.php      REST API
 includes/screenshots.php
 includes/slack.php
 includes/front.php     loader, board page, admin bar, JS strings
-includes/admin.php     Tools > Feedback Pins
+includes/admin.php     Tools > Pinora
 assets/js/             toolbar + board (vanilla JS, no build step)
 assets/vendor/         html2canvas 1.4.1 (MIT)
 languages/             .pot + French
@@ -103,12 +103,12 @@ No build step, no Composer, no npm: what you see is what ships.
 ### Translations
 
 ```bash
-wp i18n make-pot . languages/feedback-pins.pot --exclude=assets/vendor --skip-js
-msgfmt -o languages/feedback-pins-fr_FR.mo languages/feedback-pins-fr_FR.po
+wp i18n make-pot . languages/pinora.pot --exclude=assets/vendor --skip-js
+msgfmt -o languages/pinora-fr_FR.mo languages/pinora-fr_FR.po
 wp i18n make-php languages
 ```
 
-JavaScript strings are declared in `fpins_js_strings()` (`includes/front.php`) so that they are extracted with the PHP ones.
+JavaScript strings are declared in `pinora_js_strings()` (`includes/front.php`) so that they are extracted with the PHP ones.
 
 ### Release
 
@@ -124,4 +124,4 @@ GPL-2.0-or-later. html2canvas is MIT, see `assets/vendor/html2canvas-LICENSE.txt
 
 ---
 
-Need a website, an online store or business software? [Let's talk about your project](https://avangardism.com/contact?utm_source=github&utm_medium=readme&utm_campaign=feedback-pins).
+Need a website, an online store or business software? [Let's talk about your project](https://avangardism.com/contact?utm_source=github&utm_medium=readme&utm_campaign=pinora).

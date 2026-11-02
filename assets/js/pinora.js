@@ -1,15 +1,15 @@
 /**
- * Feedback Pins: shared store + review toolbar on the site.
+ * Pinora: shared store + review toolbar on the site.
  *
  * Two parts:
  *
- * 1. `FeedbackPins.store`: the notes, read and written through the
- *    `feedback-pins/v1/notes` REST route. The server is the only source of
+ * 1. `Pinora.store`: the notes, read and written through the
+ *    `pinora/v1/notes` REST route. The server is the only source of
  *    truth, `localStorage` is just a warm-up cache. Every open browser reloads
  *    the list every 15 s (and when the tab comes back): what one reviewer
  *    pins shows up for everyone else without reloading.
  *
- * 2. The review toolbar, active only after `?fpins=1` in this browser: click
+ * 2. The review toolbar, active only after `?pinora=1` in this browser: click
  *    an element, write a note, a numbered pin stays on it.
  *
  * The DOM is always built with `textContent`, never `innerHTML`: notes are
@@ -18,11 +18,11 @@
 (function () {
 	'use strict';
 
-	var CONFIG = window.FEEDBACK_PINS || {};
+	var CONFIG = window.PINORA || {};
 
 	// Scoped to the site: two WordPress sites of a multisite network can share
 	// an origin, they must not share a key.
-	var NS = 'fpins:' + (CONFIG.rest || '') + ':';
+	var NS = 'pinora:' + (CONFIG.rest || '') + ':';
 	var LS_KEY = NS + 'key';
 	var LS_AUTHOR = NS + 'author';
 	var LS_MODE = NS + 'mode';
@@ -133,7 +133,7 @@
 				try {
 					fn(notes, state);
 				} catch (e) {
-					console.error('[feedback-pins]', e);
+					console.error('[pinora]', e);
 				}
 			});
 		}
@@ -154,7 +154,7 @@
 		}
 
 		function call(method, path, body) {
-			var headers = { 'X-Feedback-Pins-Key': read(LS_KEY) };
+			var headers = { 'X-Pinora-Key': read(LS_KEY) };
 			var verb = method;
 			// DELETE goes as POST + override: some hosts filter the rarer verbs.
 			if (method === 'DELETE') {
@@ -292,17 +292,17 @@
 
 	/**
 	 * Reads the review key from the address and stores it. It travels in the
-	 * fragment (`#fpins_key=…`), which browsers never send to the server, and
+	 * fragment (`#pinora_key=…`), which browsers never send to the server, and
 	 * is removed from the address straight away.
 	 */
 	function takeKeyFromUrl() {
 		var url = new URL(window.location.href);
 		var hash = new URLSearchParams(url.hash.replace(/^#/, ''));
-		var key = hash.get('fpins_key') || url.searchParams.get('fpins_key');
+		var key = hash.get('pinora_key') || url.searchParams.get('pinora_key');
 		if (!key) return false;
 		write(LS_KEY, key.trim());
-		hash.delete('fpins_key');
-		url.searchParams.delete('fpins_key');
+		hash.delete('pinora_key');
+		url.searchParams.delete('pinora_key');
 		var rest = hash.toString();
 		window.history.replaceState(null, '', url.pathname + url.search + (rest ? '#' + rest : ''));
 		return true;
@@ -311,12 +311,12 @@
 	/* ── Dialog and messages, shared with the board ─────────────────────────── */
 
 	function dialog(title, content, footer) {
-		var backdrop = el('div', { class: 'fpins-backdrop', 'data-fpins': '' });
-		var titleId = 'fpins-dialog-' + Date.now();
-		var box = el('div', { class: 'fpins-dialog', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId }, [
-			el('h2', { class: 'fpins-dialog-title', id: titleId, text: title }),
+		var backdrop = el('div', { class: 'pinora-backdrop', 'data-pinora': '' });
+		var titleId = 'pinora-dialog-' + Date.now();
+		var box = el('div', { class: 'pinora-dialog', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId }, [
+			el('h2', { class: 'pinora-dialog-title', id: titleId, text: title }),
 			content,
-			footer ? el('div', { class: 'fpins-dialog-footer' }, footer) : null
+			footer ? el('div', { class: 'pinora-dialog-footer' }, footer) : null
 		]);
 		var previous = document.activeElement;
 		function close() {
@@ -366,7 +366,7 @@
 
 	function announce(text) {
 		if (!liveRegion) {
-			liveRegion = el('div', { class: 'fpins-sr-only', role: 'status', 'aria-live': 'polite', 'data-fpins': '' });
+			liveRegion = el('div', { class: 'pinora-sr-only', role: 'status', 'aria-live': 'polite', 'data-pinora': '' });
 			document.body.appendChild(liveRegion);
 		}
 		liveRegion.textContent = '';
@@ -376,7 +376,7 @@
 	}
 
 	function toast(text, isError) {
-		var m = el('div', { class: 'fpins-toast' + (isError ? ' fpins-toast-error' : ''), 'aria-hidden': 'true', 'data-fpins': '', text: text });
+		var m = el('div', { class: 'pinora-toast' + (isError ? ' pinora-toast-error' : ''), 'aria-hidden': 'true', 'data-pinora': '', text: text });
 		document.body.appendChild(m);
 		announce(text);
 		window.setTimeout(function () {
@@ -388,9 +388,9 @@
 	 * Asks for the key and the first name. `then` runs once both are known.
 	 */
 	function identify(then) {
-		var keyField = el('input', { class: 'fpins-field', type: 'password', id: 'fpins-key', autocomplete: 'off', value: store.key() });
-		var nameField = el('input', { class: 'fpins-field', type: 'text', id: 'fpins-name', autocomplete: 'given-name', value: store.author(), placeholder: t('e.g. Camille') });
-		var error = el('p', { class: 'fpins-error', role: 'alert' });
+		var keyField = el('input', { class: 'pinora-field', type: 'password', id: 'pinora-key', autocomplete: 'off', value: store.key() });
+		var nameField = el('input', { class: 'pinora-field', type: 'text', id: 'pinora-name', autocomplete: 'given-name', value: store.author(), placeholder: t('e.g. Camille') });
+		var error = el('p', { class: 'pinora-error', role: 'alert' });
 		var d;
 		function submit() {
 			if (!nameField.value.trim() || !keyField.value.trim()) {
@@ -410,16 +410,16 @@
 		d = dialog(
 			t('Who is reviewing?'),
 			el('div', {}, [
-				el('p', { class: 'fpins-help', text: t('Your first name signs your notes, so the team knows who spotted what. The key came with your review link.') }),
-				el('label', { class: 'fpins-label', for: 'fpins-name', text: t('Your first name') }),
+				el('p', { class: 'pinora-help', text: t('Your first name signs your notes, so the team knows who spotted what. The key came with your review link.') }),
+				el('label', { class: 'pinora-label', for: 'pinora-name', text: t('Your first name') }),
 				nameField,
-				el('label', { class: 'fpins-label', for: 'fpins-key', text: t('Review key') }),
+				el('label', { class: 'pinora-label', for: 'pinora-key', text: t('Review key') }),
 				keyField,
 				error
 			]),
 			[
-				el('button', { type: 'button', class: 'fpins-btn', text: t('Cancel'), onclick: function () { d.close(); } }),
-				el('button', { type: 'button', class: 'fpins-btn fpins-btn-primary', text: t('Continue'), onclick: submit })
+				el('button', { type: 'button', class: 'pinora-btn', text: t('Cancel'), onclick: function () { d.close(); } }),
+				el('button', { type: 'button', class: 'pinora-btn pinora-btn-primary', text: t('Continue'), onclick: submit })
 			]
 		);
 		d.box.addEventListener('keydown', function (e) {
@@ -428,11 +428,11 @@
 	}
 
 	function loadCss() {
-		if (!CONFIG.css || document.getElementById('fpins-css')) return;
-		document.head.appendChild(el('link', { id: 'fpins-css', rel: 'stylesheet', href: CONFIG.css }));
+		if (!CONFIG.css || document.getElementById('pinora-css')) return;
+		document.head.appendChild(el('link', { id: 'pinora-css', rel: 'stylesheet', href: CONFIG.css }));
 	}
 
-	window.FeedbackPins = {
+	window.Pinora = {
 		store: store,
 		el: el,
 		t: t,
@@ -453,26 +453,26 @@
 	/* ── Review toolbar on the site ─────────────────────────────────────────── */
 
 	/**
-	 * `?fpins=1` turns review mode on and remembers it, `?fpins=0` turns it off,
-	 * `#fpins_key=…` stores the key. Everything is then removed from the address.
+	 * `?pinora=1` turns review mode on and remembers it, `?pinora=0` turns it off,
+	 * `#pinora_key=…` stores the key. Everything is then removed from the address.
 	 */
-	var targetNote = null; // `?fpins_note=ID`: note to show on arrival
+	var targetNote = null; // `?pinora_note=ID`: note to show on arrival
 
 	function readParams() {
 		if (takeKeyFromUrl()) write(LS_MODE, '1');
 		var url = new URL(window.location.href);
 		var p = url.searchParams;
 		var touched = false;
-		if (p.has('fpins_note')) {
-			targetNote = Number(p.get('fpins_note')) || null;
+		if (p.has('pinora_note')) {
+			targetNote = Number(p.get('pinora_note')) || null;
 			write(LS_MODE, '1');
-			p.delete('fpins_note');
+			p.delete('pinora_note');
 			touched = true;
 		}
-		if (p.get('fpins') === '1') write(LS_MODE, '1');
-		if (p.get('fpins') === '0') write(LS_MODE, '');
-		if (p.has('fpins')) {
-			p.delete('fpins');
+		if (p.get('pinora') === '1') write(LS_MODE, '1');
+		if (p.get('pinora') === '0') write(LS_MODE, '');
+		if (p.has('pinora')) {
+			p.delete('pinora');
 			touched = true;
 		}
 		if (touched) window.history.replaceState(null, '', url.pathname + (p.toString() ? '?' + p.toString() : '') + url.hash);
@@ -555,17 +555,17 @@
 		var pinned = [];
 		Array.prototype.forEach.call(document.body.getElementsByTagName('*'), function (n) {
 			// An element inside an already marked element follows its parent.
-			if (n.closest('[data-fpins]') || (n.parentElement && n.parentElement.closest('[data-fpins-fixed]'))) return;
+			if (n.closest('[data-pinora]') || (n.parentElement && n.parentElement.closest('[data-pinora-fixed]'))) return;
 			var pos = window.getComputedStyle(n).position;
 			if (pos !== 'fixed' && pos !== 'sticky') return;
 			var r = n.getBoundingClientRect();
 			if (!r.width || !r.height) return;
-			n.setAttribute('data-fpins-fixed', String(pinned.length));
+			n.setAttribute('data-pinora-fixed', String(pinned.length));
 			pinned.push({ x: r.left + window.scrollX, y: r.top + window.scrollY });
 		});
 		function forgetPinned() {
-			Array.prototype.forEach.call(document.querySelectorAll('[data-fpins-fixed]'), function (n) {
-				n.removeAttribute('data-fpins-fixed');
+			Array.prototype.forEach.call(document.querySelectorAll('[data-pinora-fixed]'), function (n) {
+				n.removeAttribute('data-pinora-fixed');
 			});
 		}
 
@@ -587,7 +587,7 @@
 				logging: false,
 				backgroundColor: '#ffffff',
 				ignoreElements: function (n) {
-					return n.hasAttribute && n.hasAttribute('data-fpins');
+					return n.hasAttribute && n.hasAttribute('data-pinora');
 				},
 				onclone: function (copy) {
 					// A body in `overflow: auto` is taken for a clipping box: anything
@@ -596,8 +596,8 @@
 					copy.body.style.overflow = 'visible';
 					// The copy is rendered unscrolled: move every sticky or fixed
 					// element back to where it was on screen.
-					Array.prototype.forEach.call(copy.querySelectorAll('[data-fpins-fixed]'), function (n) {
-						var target = pinned[Number(n.getAttribute('data-fpins-fixed'))];
+					Array.prototype.forEach.call(copy.querySelectorAll('[data-pinora-fixed]'), function (n) {
+						var target = pinned[Number(n.getAttribute('data-pinora-fixed'))];
 						var r = n.getBoundingClientRect();
 						var dx = target.x - r.left;
 						var dy = target.y - r.top;
@@ -651,21 +651,21 @@
 		var openId = null; // note whose bubble is open
 		var showClosed = false;
 
-		var layer = el('div', { class: 'fpins-layer', 'data-fpins': '' });
-		var hover = el('div', { class: 'fpins-hover', 'data-fpins': '' });
-		var banner = el('div', { class: 'fpins-banner', 'data-fpins': '', text: t('Click the element you want to comment on, or reach it with Tab and press Enter · Esc to cancel') });
-		var counter = el('span', { class: 'fpins-counter' });
-		var syncDot = el('span', { class: 'fpins-sync', role: 'img', title: '' });
-		var addButton = el('button', { type: 'button', class: 'fpins-bar-add', text: t('+ Note') });
-		var panel = el('aside', { class: 'fpins-panel', 'data-fpins': '', 'aria-label': t('Notes on this page'), hidden: true });
+		var layer = el('div', { class: 'pinora-layer', 'data-pinora': '' });
+		var hover = el('div', { class: 'pinora-hover', 'data-pinora': '' });
+		var banner = el('div', { class: 'pinora-banner', 'data-pinora': '', text: t('Click the element you want to comment on, or reach it with Tab and press Enter · Esc to cancel') });
+		var counter = el('span', { class: 'pinora-counter' });
+		var syncDot = el('span', { class: 'pinora-sync', role: 'img', title: '' });
+		var addButton = el('button', { type: 'button', class: 'pinora-bar-add', text: t('+ Note') });
+		var panel = el('aside', { class: 'pinora-panel', 'data-pinora': '', 'aria-label': t('Notes on this page'), hidden: true });
 
-		var bar = el('div', { class: 'fpins-bar', 'data-fpins': '', role: 'toolbar', 'aria-label': t('Feedback Pins') }, [
+		var bar = el('div', { class: 'pinora-bar', 'data-pinora': '', role: 'toolbar', 'aria-label': t('Pinora') }, [
 			syncDot,
 			counter,
 			addButton,
-			el('button', { type: 'button', class: 'fpins-bar-link', text: t('List'), onclick: togglePanel }),
-			el('a', { class: 'fpins-bar-link', href: CONFIG.board, target: '_blank', rel: 'noopener', text: t('Board') }),
-			el('button', { type: 'button', class: 'fpins-bar-close', title: t('Leave review mode'), 'aria-label': t('Leave review mode'), text: '×', onclick: quit })
+			el('button', { type: 'button', class: 'pinora-bar-link', text: t('List'), onclick: togglePanel }),
+			el('a', { class: 'pinora-bar-link', href: CONFIG.board, target: '_blank', rel: 'noopener', text: t('Board') }),
+			el('button', { type: 'button', class: 'pinora-bar-close', title: t('Leave review mode'), 'aria-label': t('Leave review mode'), text: '×', onclick: quit })
 		]);
 
 		document.body.appendChild(layer);
@@ -740,7 +740,7 @@
 			lastSignature = signature;
 
 			counter.textContent = t('%d open', open.length);
-			syncDot.className = 'fpins-sync' + (st.ok ? '' : ' fpins-sync-ko');
+			syncDot.className = 'pinora-sync' + (st.ok ? '' : ' pinora-sync-ko');
 			syncDot.title = st.ok ? t('In sync with the team') : t('Sync failed: %s', st.message);
 			syncDot.setAttribute('aria-label', syncDot.title);
 
@@ -750,7 +750,7 @@
 				if (!pos || (isClosed(n) && n.id !== openId)) return;
 				layer.appendChild(el('button', {
 					type: 'button',
-					class: 'fpins-pin fpins-sev-' + n.severity + (isClosed(n) ? ' fpins-pin-closed' : ''),
+					class: 'pinora-pin pinora-sev-' + n.severity + (isClosed(n) ? ' pinora-pin-closed' : ''),
 					style: 'left:' + pos.x + 'px;top:' + pos.y + 'px',
 					title: (n.author ? n.author + ': ' : '') + n.description,
 					'aria-label': t('Note %d', i + 1),
@@ -774,20 +774,20 @@
 			var min = window.scrollX + 16 - ox;
 			var max = window.scrollX + window.innerWidth - width - 16 - ox;
 			var left = Math.max(min, Math.min(pos.x - 12, max));
-			return el('div', { class: 'fpins-bubble fpins-edge-' + n.severity, style: 'left:' + left + 'px;top:' + (pos.y + 18) + 'px;width:' + width + 'px' }, [
-				el('div', { class: 'fpins-bubble-head' }, [
-					el('strong', { class: 'fpins-txt-' + n.severity, text: '#' + number + ' · ' + severityLabel(n.severity) }),
-					el('span', { class: 'fpins-status fpins-status-' + n.status, text: statusLabel(n.status) }),
-					el('button', { type: 'button', class: 'fpins-x', 'aria-label': t('Close'), text: '×', onclick: function () { openId = null; draw(); } })
+			return el('div', { class: 'pinora-bubble pinora-edge-' + n.severity, style: 'left:' + left + 'px;top:' + (pos.y + 18) + 'px;width:' + width + 'px' }, [
+				el('div', { class: 'pinora-bubble-head' }, [
+					el('strong', { class: 'pinora-txt-' + n.severity, text: '#' + number + ' · ' + severityLabel(n.severity) }),
+					el('span', { class: 'pinora-status pinora-status-' + n.status, text: statusLabel(n.status) }),
+					el('button', { type: 'button', class: 'pinora-x', 'aria-label': t('Close'), text: '×', onclick: function () { openId = null; draw(); } })
 				]),
-				el('div', { class: 'fpins-meta', text: [n.author || t('Anonymous'), since(n.createdAt), n.sectionLabel].filter(Boolean).join(' · ') }),
-				el('div', { class: 'fpins-description', text: n.description }),
-				n.fixNote ? el('div', { class: 'fpins-answer' }, [el('strong', { text: t('Answer:') + ' ' }), n.fixNote]) : null,
-				el('div', { class: 'fpins-actions' }, [
+				el('div', { class: 'pinora-meta', text: [n.author || t('Anonymous'), since(n.createdAt), n.sectionLabel].filter(Boolean).join(' · ') }),
+				el('div', { class: 'pinora-description', text: n.description }),
+				n.fixNote ? el('div', { class: 'pinora-answer' }, [el('strong', { text: t('Answer:') + ' ' }), n.fixNote]) : null,
+				el('div', { class: 'pinora-actions' }, [
 					isClosed(n)
-						? el('button', { type: 'button', class: 'fpins-btn fpins-btn-small', text: t('Reopen'), onclick: function () { change(n.id, { status: 'open' }); } })
-						: el('button', { type: 'button', class: 'fpins-btn fpins-btn-small fpins-btn-primary', text: t('Mark as fixed'), onclick: function () { openId = null; change(n.id, { status: 'fixed' }); } }),
-					el('button', { type: 'button', class: 'fpins-btn fpins-btn-small fpins-btn-danger', text: t('Delete'), onclick: function () { remove(n); } })
+						? el('button', { type: 'button', class: 'pinora-btn pinora-btn-small', text: t('Reopen'), onclick: function () { change(n.id, { status: 'open' }); } })
+						: el('button', { type: 'button', class: 'pinora-btn pinora-btn-small pinora-btn-primary', text: t('Mark as fixed'), onclick: function () { openId = null; change(n.id, { status: 'fixed' }); } }),
+					el('button', { type: 'button', class: 'pinora-btn pinora-btn-small pinora-btn-danger', text: t('Delete'), onclick: function () { remove(n); } })
 				])
 			]);
 		}
@@ -819,27 +819,27 @@
 			});
 			var closed = list.filter(isClosed).length;
 			panel.textContent = '';
-			panel.appendChild(el('div', { class: 'fpins-panel-head' }, [
+			panel.appendChild(el('div', { class: 'pinora-panel-head' }, [
 				el('strong', { text: t('Notes on this page') }),
-				el('button', { type: 'button', class: 'fpins-x', 'aria-label': t('Close the list'), text: '×', onclick: togglePanel })
+				el('button', { type: 'button', class: 'pinora-x', 'aria-label': t('Close the list'), text: '×', onclick: togglePanel })
 			]));
 			if (closed) {
-				var box = el('input', { type: 'checkbox', id: 'fpins-closed', checked: showClosed, onchange: function () { showClosed = box.checked; draw(); } });
-				panel.appendChild(el('label', { class: 'fpins-option', for: 'fpins-closed' }, [box, ' ' + t('Show %d closed note(s)', closed)]));
+				var box = el('input', { type: 'checkbox', id: 'pinora-closed', checked: showClosed, onchange: function () { showClosed = box.checked; draw(); } });
+				panel.appendChild(el('label', { class: 'pinora-option', for: 'pinora-closed' }, [box, ' ' + t('Show %d closed note(s)', closed)]));
 			}
 			if (!visible.length) {
-				panel.appendChild(el('p', { class: 'fpins-empty', text: t('No open note on this page. Click “+ Note” to add one.') }));
+				panel.appendChild(el('p', { class: 'pinora-empty', text: t('No open note on this page. Click “+ Note” to add one.') }));
 				return;
 			}
 			visible.forEach(function (n) {
 				var number = list.indexOf(n) + 1;
 				panel.appendChild(el('button', {
 					type: 'button',
-					class: 'fpins-row fpins-edge-' + n.severity + (isClosed(n) ? ' fpins-row-closed' : ''),
+					class: 'pinora-row pinora-edge-' + n.severity + (isClosed(n) ? ' pinora-row-closed' : ''),
 					onclick: function () { goTo(n); }
 				}, [
-					el('span', { class: 'fpins-meta', text: '#' + number + ' · ' + severityLabel(n.severity) + ' · ' + (n.author || t('Anonymous')) + ' · ' + since(n.createdAt) + (isClosed(n) ? ' · ' + statusLabel(n.status) : '') }),
-					el('span', { class: 'fpins-row-text', text: n.description })
+					el('span', { class: 'pinora-meta', text: '#' + number + ' · ' + severityLabel(n.severity) + ' · ' + (n.author || t('Anonymous')) + ' · ' + since(n.createdAt) + (isClosed(n) ? ' · ' + statusLabel(n.status) : '') }),
+					el('span', { class: 'pinora-row-text', text: n.description })
 				]));
 			});
 		}
@@ -857,8 +857,8 @@
 		function setAddMode(on) {
 			addMode = on;
 			addButton.textContent = on ? t('Cancel') : t('+ Note');
-			addButton.classList.toggle('fpins-active', on);
-			document.documentElement.classList.toggle('fpins-adding', on);
+			addButton.classList.toggle('pinora-active', on);
+			document.documentElement.classList.toggle('pinora-adding', on);
 			if (on) {
 				document.body.appendChild(banner);
 				announce(banner.textContent);
@@ -870,7 +870,7 @@
 		}
 
 		function outsideTool(target) {
-			return target && !(target.closest && target.closest('[data-fpins]'));
+			return target && !(target.closest && target.closest('[data-pinora]'));
 		}
 
 		window.addEventListener('mousemove', function (e) {
@@ -914,7 +914,7 @@
 			// The picture is taken right away, while the reviewer types.
 			var shot = screenshot(r, cx, cy);
 			shot.catch(function (err) {
-				console.warn('[feedback-pins] screenshot failed:', err.message);
+				console.warn('[pinora] screenshot failed:', err.message);
 			});
 			compose(shot, {
 				selector: cssPath(target),
@@ -955,38 +955,38 @@
 			var severity = 'major';
 			var image = null;
 			var attach = true;
-			var preview = el('div', { class: 'fpins-preview' }, [el('span', { class: 'fpins-meta', text: t('Taking a screenshot…') })]);
+			var preview = el('div', { class: 'pinora-preview' }, [el('span', { class: 'pinora-meta', text: t('Taking a screenshot…') })]);
 			shot.then(function (dataurl) {
 				image = dataurl;
 				preview.textContent = '';
 				preview.appendChild(el('img', { src: dataurl, alt: t('Screenshot attached to the note') }));
-				preview.appendChild(el('button', { type: 'button', class: 'fpins-preview-remove', text: t('Do not attach'), onclick: function () {
+				preview.appendChild(el('button', { type: 'button', class: 'pinora-preview-remove', text: t('Do not attach'), onclick: function () {
 					attach = false;
 					preview.textContent = '';
-					preview.appendChild(el('span', { class: 'fpins-meta', text: t('Screenshot removed.') }));
+					preview.appendChild(el('span', { class: 'pinora-meta', text: t('Screenshot removed.') }));
 				} }));
 			}, function () {
 				preview.textContent = '';
-				preview.appendChild(el('span', { class: 'fpins-meta', text: t('No screenshot on this page: the note will be located by its position.') }));
+				preview.appendChild(el('span', { class: 'pinora-meta', text: t('No screenshot on this page: the note will be located by its position.') }));
 			});
-			var text = el('textarea', { class: 'fpins-field', rows: '4', 'aria-label': t('Your note'), placeholder: t('e.g. the button is too small on mobile, the text should say…') });
-			var chips = el('div', { class: 'fpins-chips', role: 'group', 'aria-label': t('Severity') });
+			var text = el('textarea', { class: 'pinora-field', rows: '4', 'aria-label': t('Your note'), placeholder: t('e.g. the button is too small on mobile, the text should say…') });
+			var chips = el('div', { class: 'pinora-chips', role: 'group', 'aria-label': t('Severity') });
 			SEVERITY_ORDER.forEach(function (s) {
-				var b = el('button', { type: 'button', class: 'fpins-chip fpins-chip-' + s, text: severityLabel(s), onclick: function () { severity = s; updateChips(); } });
+				var b = el('button', { type: 'button', class: 'pinora-chip pinora-chip-' + s, text: severityLabel(s), onclick: function () { severity = s; updateChips(); } });
 				b.dataset.sev = s;
 				chips.appendChild(b);
 			});
 			function updateChips() {
 				Array.prototype.forEach.call(chips.children, function (b) {
 					var active = b.dataset.sev === severity;
-					b.classList.toggle('fpins-chip-active', active);
+					b.classList.toggle('pinora-chip-active', active);
 					b.setAttribute('aria-pressed', active ? 'true' : 'false');
 				});
 			}
 			updateChips();
 
 			var d;
-			var button = el('button', { type: 'button', class: 'fpins-btn fpins-btn-primary', text: t('Save'), onclick: save });
+			var button = el('button', { type: 'button', class: 'pinora-btn pinora-btn-primary', text: t('Save'), onclick: save });
 			function save() {
 				if (!text.value.trim()) {
 					text.focus();
@@ -1018,14 +1018,14 @@
 			}
 
 			d = dialog(t('New note'), el('div', {}, [
-				anchor.sectionLabel ? el('p', { class: 'fpins-meta', text: t('Section: %s', anchor.sectionLabel) }) : null,
+				anchor.sectionLabel ? el('p', { class: 'pinora-meta', text: t('Section: %s', anchor.sectionLabel) }) : null,
 				text,
 				preview,
-				el('p', { class: 'fpins-label', text: t('Severity') }),
+				el('p', { class: 'pinora-label', text: t('Severity') }),
 				chips,
-				el('p', { class: 'fpins-help', text: t('Signed “%s”. ⌘/Ctrl + Enter to save.', store.author()) })
+				el('p', { class: 'pinora-help', text: t('Signed “%s”. ⌘/Ctrl + Enter to save.', store.author()) })
 			]), [
-				el('button', { type: 'button', class: 'fpins-btn', text: t('Cancel'), onclick: function () { d.close(); } }),
+				el('button', { type: 'button', class: 'pinora-btn', text: t('Cancel'), onclick: function () { d.close(); } }),
 				button
 			]);
 			text.addEventListener('keydown', function (e) {
@@ -1060,8 +1060,8 @@
 				var target = null;
 				try { target = n.selector ? document.querySelector(n.selector) : null; } catch (e) { target = null; }
 				if (target) {
-					target.classList.add('fpins-flash');
-					window.setTimeout(function () { target.classList.remove('fpins-flash'); }, 4000);
+					target.classList.add('pinora-flash');
+					window.setTimeout(function () { target.classList.remove('pinora-flash'); }, 4000);
 				}
 				return true;
 			};

@@ -19,20 +19,20 @@ jobs:
       - name: Check the version numbers match the tag
         run: |
           TAG="${GITHUB_REF_NAME#v}"
-          grep -q "Version:           $TAG" feedback-pins.php
+          grep -q "Version:           $TAG" pinora.php
           grep -q "Stable tag: $TAG" readme.txt
-          grep -q "define( 'FPINS_VERSION', '$TAG' );" feedback-pins.php
+          grep -q "define( 'PINORA_VERSION', '$TAG' );" pinora.php
 
       - name: Build the zip
         run: |
-          mkdir -p build/feedback-pins
-          rsync -a --exclude-from=.distignore ./ build/feedback-pins/
-          cd build && zip -rq feedback-pins.zip feedback-pins
+          mkdir -p build/pinora
+          rsync -a --exclude-from=.distignore ./ build/pinora/
+          cd build && zip -rq pinora.zip pinora
 
       - name: Publish the GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: build/feedback-pins.zip
+          files: build/pinora.zip
           generate_release_notes: true
 
       - name: Deploy to WordPress.org
@@ -41,4 +41,4 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: feedback-pins
+          SLUG: pinora

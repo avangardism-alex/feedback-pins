@@ -1,26 +1,26 @@
 <?php
 /**
- * Screenshots attached to notes, stored in `uploads/feedback-pins/`.
+ * Screenshots attached to notes, stored in `uploads/pinora/`.
  *
  * The file name carries a random part: the URL is public (Slack has to be
  * able to display it) but cannot be guessed.
  *
- * @package FeedbackPins
+ * @package Pinora
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /** Maximum size of a decoded screenshot, in bytes. */
-const FPINS_SCREENSHOT_MAX = 3 * 1024 * 1024;
+const PINORA_SCREENSHOT_MAX = 3 * 1024 * 1024;
 
 /**
  * Screenshot folder, created on first use.
  *
  * @return array{dir: string, url: string}
  */
-function fpins_screenshot_dir() {
+function pinora_screenshot_dir() {
 	$uploads = wp_upload_dir( null, false );
-	$dir     = trailingslashit( $uploads['basedir'] ) . 'feedback-pins';
+	$dir     = trailingslashit( $uploads['basedir'] ) . 'pinora';
 
 	if ( ! is_dir( $dir ) && wp_mkdir_p( $dir ) ) {
 		// No directory listing, even where the server allows it.
@@ -29,7 +29,7 @@ function fpins_screenshot_dir() {
 
 	return array(
 		'dir' => $dir,
-		'url' => trailingslashit( $uploads['baseurl'] ) . 'feedback-pins',
+		'url' => trailingslashit( $uploads['baseurl'] ) . 'pinora',
 	);
 }
 
@@ -39,8 +39,8 @@ function fpins_screenshot_dir() {
  * @param string $file File name.
  * @return string
  */
-function fpins_screenshot_url( $file ) {
-	return fpins_screenshot_dir()['url'] . '/' . rawurlencode( basename( $file ) );
+function pinora_screenshot_url( $file ) {
+	return pinora_screenshot_dir()['url'] . '/' . rawurlencode( basename( $file ) );
 }
 
 /**
@@ -53,7 +53,7 @@ function fpins_screenshot_url( $file ) {
  * @param string $dataurl Encoded image, `data:image/jpeg;base64,…`.
  * @return bool
  */
-function fpins_save_screenshot( $id, $dataurl ) {
+function pinora_save_screenshot( $id, $dataurl ) {
 	if ( ! preg_match( '#^data:image/(jpeg|png);base64,#', $dataurl, $m ) ) {
 		return false;
 	}
@@ -61,17 +61,17 @@ function fpins_save_screenshot( $id, $dataurl ) {
 	// Decoding a data URL sent by the browser, not obfuscated code.
 	$bytes = base64_decode( substr( $dataurl, strlen( $m[0] ) ), true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
 
-	if ( false === $bytes || strlen( $bytes ) > FPINS_SCREENSHOT_MAX ) {
+	if ( false === $bytes || strlen( $bytes ) > PINORA_SCREENSHOT_MAX ) {
 		return false;
 	}
 
-	$dir  = fpins_screenshot_dir();
+	$dir  = pinora_screenshot_dir();
 	$ext  = 'png' === $m[1] ? 'png' : 'jpg';
 	$file = sprintf( 'note-%d-%s.%s', $id, strtolower( wp_generate_password( 12, false, false ) ), $ext );
 	$path = $dir['dir'] . '/' . $file;
 
 	if ( false === file_put_contents( $path, $bytes ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
-		fpins_log( 'screenshot not written for note ' . $id );
+		pinora_log( 'screenshot not written for note ' . $id );
 		return false;
 	}
 
@@ -82,7 +82,7 @@ function fpins_save_screenshot( $id, $dataurl ) {
 		return false;
 	}
 
-	update_post_meta( $id, '_fpins_screenshot', $file );
+	update_post_meta( $id, '_pinora_screenshot', $file );
 
 	return true;
 }
@@ -93,26 +93,26 @@ function fpins_save_screenshot( $id, $dataurl ) {
  *
  * @param int $id ID of the post being deleted.
  */
-function fpins_delete_screenshot( $id ) {
-	if ( FPINS_CPT !== get_post_type( $id ) ) {
+function pinora_delete_screenshot( $id ) {
+	if ( PINORA_CPT !== get_post_type( $id ) ) {
 		return;
 	}
 
-	$file = get_post_meta( $id, '_fpins_screenshot', true );
+	$file = get_post_meta( $id, '_pinora_screenshot', true );
 
 	if ( $file ) {
-		wp_delete_file( fpins_screenshot_dir()['dir'] . '/' . basename( $file ) );
+		wp_delete_file( pinora_screenshot_dir()['dir'] . '/' . basename( $file ) );
 	}
 }
-add_action( 'before_delete_post', 'fpins_delete_screenshot' );
+add_action( 'before_delete_post', 'pinora_delete_screenshot' );
 
 /**
  * Writes to the PHP error log when `WP_DEBUG` is on. Never blocking.
  *
  * @param string $message Message.
  */
-function fpins_log( $message ) {
+function pinora_log( $message ) {
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-		error_log( '[feedback-pins] ' . $message ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		error_log( '[pinora] ' . $message ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 	}
 }

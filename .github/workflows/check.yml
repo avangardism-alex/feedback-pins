@@ -20,10 +20,10 @@ jobs:
 
       - name: Build the plugin as it ships
         run: |
-          mkdir -p build/feedback-pins
-          rsync -a --exclude-from=.distignore --exclude=build ./ build/feedback-pins/
+          mkdir -p build/pinora
+          rsync -a --exclude-from=.distignore --exclude=build ./ build/pinora/
 
       - name: WordPress Plugin Check
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: build/feedback-pins
+          build-dir: build/pinora

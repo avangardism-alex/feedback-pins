@@ -1,4 +1,4 @@
-=== Feedback Pins – QA & Client Feedback ===
+=== Pinora – QA & Client Feedback ===
 Contributors: avangardism
 Tags: feedback, client review, annotation, qa, bug report
 Requires at least: 6.3
@@ -12,13 +12,13 @@ Your clients pin feedback right on the page. Your team sees it all, live, on one
 
 == Description ==
 
-**Stop collecting website feedback in endless email threads.** With Feedback Pins, your clients click the element they want to talk about, type a note, and a numbered pin stays on the page. Everyone on the project sees everyone else's notes, live, on the page and on a shared board.
+**Stop collecting website feedback in endless email threads.** With Pinora, your clients click the element they want to talk about, type a note, and a numbered pin stays on the page. Everyone on the project sees everyone else's notes, live, on the page and on a shared board.
 
 Built by [AVANGARDISM](https://avangardism.com/?utm_source=wordpress.org&utm_medium=plugin&utm_campaign=readme), a web agency that uses it on its own client projects. Free, for good: no account, no premium version, no external service.
 
 = How it works =
 
-1. Send your client the invitation link from **Tools > Feedback Pins**.
+1. Send your client the invitation link from **Tools > Pinora**.
 2. They type their first name once, then click **+ Note** and click any element of any page.
 3. A screenshot is taken, the element is framed, the note is saved with its severity.
 4. Your team sees the numbered pin on the page and the card on the board, within 15 seconds, without reloading.
@@ -50,9 +50,9 @@ AVANGARDISM designs and builds websites, e-commerce stores and business software
 
 == Installation ==
 
-1. Install the plugin from **Plugins > Add New**, or upload the `feedback-pins` folder to `/wp-content/plugins/`.
+1. Install the plugin from **Plugins > Add New**, or upload the `pinora` folder to `/wp-content/plugins/`.
 2. Activate it.
-3. Go to **Tools > Feedback Pins** and copy the invitation link.
+3. Go to **Tools > Pinora** and copy the invitation link.
 4. Send it to your reviewers. That's it.
 
 Logged-in administrators also get a **Feedback** menu in the toolbar to review the current page or open the board.
@@ -61,8 +61,8 @@ Logged-in administrators also get a **Feedback** menu in the toolbar to review t
 
 Set them in `wp-config.php` to keep secrets out of the database:
 
-`define( 'FPINS_KEY', 'your-own-key' );`
-`define( 'FPINS_SLACK_WEBHOOK', 'https://hooks.slack.com/services/…' );`
+`define( 'PINORA_KEY', 'your-own-key' );`
+`define( 'PINORA_SLACK_WEBHOOK', 'https://hooks.slack.com/services/…' );`
 
 == Frequently Asked Questions ==
 
@@ -72,11 +72,11 @@ No. The invitation link carries a shared key. Anyone who has it can read and wri
 
 = Is the key visible in server logs? =
 
-No. It travels in the URL fragment (`#fpins_key=…`), which browsers never send to the server, and is removed from the address bar as soon as the page opens. Afterwards it is sent in an HTTP header.
+No. It travels in the URL fragment (`#pinora_key=…`), which browsers never send to the server, and is removed from the address bar as soon as the page opens. Afterwards it is sent in an HTTP header.
 
 = Where is the board? =
 
-At `/feedback-board/` on your site. If a real page already uses that address, the page wins: change the path with the `fpins_board_path` filter.
+At `/feedback-board/` on your site. If a real page already uses that address, the page wins: change the path with the `pinora_board_path` filter.
 
 = Does it slow down my site? =
 
@@ -92,7 +92,7 @@ Yes. The toolbar sits on top of the page and does not depend on the theme or bui
 
 = Can I customize it? =
 
-A few filters are available: `fpins_board_path`, `fpins_capability`, `fpins_sync_interval`, `fpins_notes_limit`, `fpins_note`, `fpins_slack_message`, and the `fpins_note_created` action.
+A few filters are available: `pinora_board_path`, `pinora_capability`, `pinora_sync_interval`, `pinora_notes_limit`, `pinora_note`, `pinora_slack_message`, and the `pinora_note_created` action.
 
 = What happens when I delete the plugin? =
 
@@ -100,7 +100,7 @@ Deleting it from the Plugins screen removes every note, every screenshot and eve
 
 == External services ==
 
-This plugin can send notifications to **Slack**, only if you enter a Slack incoming webhook URL in **Tools > Feedback Pins** (or define `FPINS_SLACK_WEBHOOK`).
+This plugin can send notifications to **Slack**, only if you enter a Slack incoming webhook URL in **Tools > Pinora** (or define `PINORA_SLACK_WEBHOOK`).
 
 * What is sent: when a note is created, its text, author first name, page path, section name, screen width, severity, the public URL of its screenshot and links back to your site.
 * Where: to the webhook URL you provided, on `hooks.slack.com`, directly from your server.
@@ -111,7 +111,7 @@ No other external request is made. The screenshot library (html2canvas) is bundl
 
 == Privacy ==
 
-Notes store the first name typed by the reviewer, the text of the note, the page path, the screen size and the browser user agent. Screenshots may show whatever was on the reviewer's screen within the page. They are saved in `wp-content/uploads/feedback-pins/` under random, unguessable names so that Slack can display them. Delete a note to delete its screenshot.
+Notes store the first name typed by the reviewer, the text of the note, the page path, the screen size and the browser user agent. Screenshots may show whatever was on the reviewer's screen within the page. They are saved in `wp-content/uploads/pinora/` under random, unguessable names so that Slack can display them. Delete a note to delete its screenshot.
 
 == Screenshots ==
 

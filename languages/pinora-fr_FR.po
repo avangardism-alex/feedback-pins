@@ -2,843 +2,845 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Feedback Pins – QA & Client Feedback 1.0.0\n"
+"Project-Id-Version: Pinora – QA & Client Feedback 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/avangardism-alex/feedback-pins/issues\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: AVANGARDISM\n"
+"Language-Team: French\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-09-24T09:41:21+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2026-09-24 10:00+0200\n"
 "X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: feedback-pins\n"
+"X-Domain: pinora\n"
 
 #. Plugin Name of the plugin
-#: feedback-pins.php
-msgid "Feedback Pins – QA & Client Feedback"
-msgstr ""
+#: pinora.php
+msgid "Pinora – QA & Client Feedback"
+msgstr "Pinora – Recette & retours clients"
 
 #. Plugin URI of the plugin
-#: feedback-pins.php
+#: pinora.php
 msgid "https://github.com/avangardism-alex/feedback-pins"
-msgstr ""
+msgstr "https://github.com/avangardism-alex/feedback-pins"
 
 #. Description of the plugin
-#: feedback-pins.php
+#: pinora.php
 msgid "Pin feedback right on your pages. Clients click any element, write a note, and the whole team sees it on a shared board, with screenshots, Slack notifications and a Markdown export. Free, no account, everything stays in your WordPress."
-msgstr ""
+msgstr "Vos retours épinglés directement sur les pages. Le client clique sur un élément, écrit sa remarque, et toute l’équipe la retrouve sur un tableau partagé, avec capture d’écran, notifications Slack et export Markdown. Gratuit, sans compte, tout reste dans votre WordPress."
 
 #. Author of the plugin
-#: feedback-pins.php
+#: pinora.php
 msgid "AVANGARDISM"
-msgstr ""
+msgstr "AVANGARDISM"
 
 #. Author URI of the plugin
-#: feedback-pins.php
-msgid "https://avangardism.com/?utm_source=feedback-pins&utm_medium=plugin&utm_campaign=plugin-header"
-msgstr ""
+#: pinora.php
+msgid "https://avangardism.com/?utm_source=pinora&utm_medium=plugin&utm_campaign=plugin-header"
+msgstr "https://avangardism.com/?utm_source=pinora&utm_medium=plugin&utm_campaign=plugin-header"
 
 #: includes/admin.php:20
 #: includes/admin.php:21
 #: includes/admin.php:268
 #: includes/front.php:352
-msgid "Feedback Pins"
-msgstr ""
+msgid "Pinora"
+msgstr "Pinora"
 
 #: includes/admin.php:46
 #: includes/front.php:288
 msgid "Settings"
-msgstr ""
+msgstr "Réglages"
 
 #: includes/admin.php:64
 msgid "Source code"
-msgstr ""
+msgstr "Code source"
 
 #: includes/admin.php:65
 msgid "Need a hand with your site?"
-msgstr ""
+msgstr "Besoin d’un coup de main pour votre site ?"
 
 #: includes/admin.php:77
 msgid "Sorry, you are not allowed to do that."
-msgstr ""
+msgstr "Désolé, vous n’avez pas l’autorisation de faire cela."
 
 #: includes/admin.php:113
 msgid "Test message: new feedback notes will show up here."
-msgstr ""
+msgstr "Message de test : les nouvelles remarques arriveront ici."
 
 #: includes/admin.php:117
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: includes/admin.php:229
 msgid "Copied!"
-msgstr ""
+msgstr "Copié !"
 
 #: includes/admin.php:229
 #: includes/front.php:329
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 #: includes/admin.php:244
 msgid "New key generated. Links sent before no longer work: send the new link below."
-msgstr ""
+msgstr "Nouvelle clé générée. Les liens déjà envoyés ne fonctionnent plus : renvoyez le lien ci-dessous."
 
 #: includes/admin.php:245
 msgid "Slack setting saved."
-msgstr ""
+msgstr "Réglage Slack enregistré."
 
 #: includes/admin.php:246
 msgid "Test message sent: check your Slack channel."
-msgstr ""
+msgstr "Message de test envoyé : vérifiez votre canal Slack."
 
 #: includes/admin.php:247
 msgid "This is not a Slack webhook URL (it must start with https://hooks.slack.com/)."
-msgstr ""
+msgstr "Ce n’est pas une adresse de webhook Slack (elle doit commencer par https://hooks.slack.com/)."
 
 #. translators: %s: error returned by Slack.
 #: includes/admin.php:249
 #, php-format
 msgid "Slack refused the message: %s"
-msgstr ""
+msgstr "Slack a refusé le message : %s"
 
 #: includes/admin.php:250
 msgid "Settings saved."
-msgstr ""
+msgstr "Réglages enregistrés."
 
 #: includes/admin.php:269
 msgid "Your clients pin their feedback right on the pages. Your team sees it all, live, on one board."
-msgstr ""
+msgstr "Vos clients épinglent leurs remarques directement sur les pages. Votre équipe voit tout, en direct, sur un seul tableau."
 
 #: includes/admin.php:279
 msgid "Invite your reviewers"
-msgstr ""
+msgstr "Invitez vos relecteurs"
 
 #. translators: %d: number of notes.
 #: includes/admin.php:283
 #, php-format
 msgid "%d note"
 msgid_plural "%d notes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d remarque"
+msgstr[1] "%d remarques"
 
 #: includes/admin.php:287
 msgid "Send this link to your client, your project manager, your team. Anyone who opens it can pin notes on any page and sees everyone else’s notes."
-msgstr ""
+msgstr "Envoyez ce lien à votre client, à votre cheffe de projet, à votre équipe. Toute personne qui l’ouvre peut épingler des remarques sur n’importe quelle page et voit celles des autres."
 
 #: includes/admin.php:288
 msgid "Invitation link"
-msgstr ""
+msgstr "Lien d’invitation"
 
 #: includes/admin.php:290
 msgid "The link turns on the review toolbar and stores the key in the browser. The key is then removed from the address bar."
-msgstr ""
+msgstr "Le lien active la barre de recette et enregistre la clé dans le navigateur. La clé est ensuite retirée de la barre d’adresse."
 
 #: includes/admin.php:291
 msgid "On first use, the reviewer types a first name to sign the notes."
-msgstr ""
+msgstr "À la première utilisation, la personne saisit un prénom pour signer ses remarques."
 
 #: includes/admin.php:292
 msgid "“+ Note”, click the element, write, save: a screenshot is attached and a numbered pin stays on the element."
-msgstr ""
+msgstr "« + Remarque », clic sur l’élément, rédaction, enregistrement : une capture d’écran est jointe et une pastille numérotée reste posée sur l’élément."
 
 #: includes/admin.php:297
 #: includes/front.php:354
 msgid "Feedback board"
-msgstr ""
+msgstr "Tableau de recette"
 
 #: includes/admin.php:298
 msgid "Every note in three columns (To do, In progress, Done), with filters, drag and drop, answers and a Markdown or JSON export."
-msgstr ""
+msgstr "Toutes les remarques en trois colonnes (À faire, En cours, Terminé), avec filtres, glisser-déposer, réponses et export Markdown ou JSON."
 
 #: includes/admin.php:299
 msgid "Board link"
-msgstr ""
+msgstr "Lien du tableau"
 
 #: includes/admin.php:300
 #: includes/front.php:280
 #: includes/slack.php:154
 msgid "Open the board"
-msgstr ""
+msgstr "Ouvrir le tableau"
 
 #: includes/admin.php:304
 #: includes/front.php:389
 msgid "Review key"
-msgstr ""
+msgstr "Clé de recette"
 
 #: includes/admin.php:305
 msgid "Nobody can read or write notes without this key. It is already included in the links above."
-msgstr ""
+msgstr "Sans cette clé, personne ne peut lire ni écrire de remarque. Elle est déjà incluse dans les liens ci-dessus."
 
 #. translators: 1: constant name, 2: file name.
 #: includes/admin.php:311
 #: includes/admin.php:333
 #, php-format
 msgid "Set by the %1$s constant in %2$s."
-msgstr ""
+msgstr "Définie par la constante %1$s dans %2$s."
 
 #: includes/admin.php:318
 msgid "Generate a new key"
-msgstr ""
+msgstr "Générer une nouvelle clé"
 
 #: includes/admin.php:318
 msgid "Links already sent will stop working. Continue?"
-msgstr ""
+msgstr "Les liens déjà envoyés cesseront de fonctionner. Continuer ?"
 
 #: includes/admin.php:324
 msgid "Slack notifications"
-msgstr ""
+msgstr "Notifications Slack"
 
 #: includes/admin.php:326
 msgid "Every new note is posted to a channel, with its screenshot and a direct link to the spot on the page. The message is sent by your own server, straight to Slack: nothing goes through a third party."
-msgstr ""
+msgstr "Chaque nouvelle remarque est postée dans un canal, avec sa capture d’écran et un lien direct vers l’endroit de la page. Le message part de votre propre serveur, directement vers Slack : rien ne transite par un tiers."
 
 #: includes/admin.php:327
 msgid "How to get a webhook URL"
-msgstr ""
+msgstr "Obtenir une adresse de webhook"
 
 #: includes/admin.php:340
 msgid "Slack webhook URL"
-msgstr ""
+msgstr "Adresse du webhook Slack"
 
 #: includes/admin.php:342
 msgid "Leave empty to turn notifications off."
-msgstr ""
+msgstr "Laisser vide pour couper les notifications."
 
 #: includes/admin.php:344
 #: includes/admin.php:369
 #: includes/front.php:391
 msgid "Save"
-msgstr ""
+msgstr "Enregistrer"
 
 #: includes/admin.php:345
 msgid "Save and send a test"
-msgstr ""
+msgstr "Enregistrer et envoyer un test"
 
 #: includes/admin.php:352
 msgid "Good to know"
-msgstr ""
+msgstr "Bon à savoir"
 
 #: includes/admin.php:354
 msgid "Visitors who never opened a review link only download a few hundred bytes: the toolbar is loaded on demand."
-msgstr ""
+msgstr "Les visiteurs qui n’ont jamais ouvert de lien de recette ne téléchargent que quelques centaines d’octets : la barre est chargée à la demande."
 
 #: includes/admin.php:355
-msgid "Screenshots are stored in uploads/feedback-pins/ under random names, and deleted with their note."
-msgstr ""
+msgid "Screenshots are stored in uploads/pinora/ under random names, and deleted with their note."
+msgstr "Les captures sont stockées dans uploads/pinora/ sous des noms aléatoires, et supprimées avec leur remarque."
 
 #: includes/admin.php:357
 msgid "See the raw notes in the admin"
-msgstr ""
+msgstr "Voir les remarques brutes dans l’administration"
 
 #: includes/admin.php:366
 msgid "Show a small “made by AVANGARDISM” credit at the bottom of the board. Off by default, it helps us keep the plugin free."
-msgstr ""
+msgstr "Afficher une petite mention « par AVANGARDISM » en bas du tableau. Désactivée par défaut, elle nous aide à garder l’extension gratuite."
 
 #: includes/admin.php:377
 msgid "Free, for good"
-msgstr ""
+msgstr "Gratuit, pour de bon"
 
 #: includes/admin.php:378
-msgid "Feedback Pins is the review tool we use with our own clients. We share it for free: no account, no premium version, your data stays in your WordPress."
-msgstr ""
+msgid "Pinora is the review tool we use with our own clients. We share it for free: no account, no premium version, your data stays in your WordPress."
+msgstr "Pinora est l’outil de recette que nous utilisons avec nos propres clients. Nous le partageons gratuitement : pas de compte, pas de version premium, vos données restent dans votre WordPress."
 
 #: includes/admin.php:379
 msgid "AVANGARDISM is a web agency: websites, e-commerce, business software and UX/UI design, with a user-first approach."
-msgstr ""
+msgstr "AVANGARDISM est une agence web : sites vitrines, e-commerce, logiciels métier et design UX/UI, avec une approche user-first."
 
 #: includes/admin.php:380
 msgid "Talk about your project"
-msgstr ""
+msgstr "Parlons de votre projet"
 
 #: includes/admin.php:384
 msgid "Help the project"
-msgstr ""
+msgstr "Aider le projet"
 
 #: includes/admin.php:385
 msgid "A bug, an idea? The code is open."
-msgstr ""
+msgstr "Un bug, une idée ? Le code est ouvert."
 
 #: includes/admin.php:387
 msgid "Report an issue"
-msgstr ""
+msgstr "Signaler un problème"
 
 #: includes/admin.php:388
 msgid "Star it on GitHub"
-msgstr ""
+msgstr "Une étoile sur GitHub"
 
 #: includes/admin.php:389
 msgid "Leave a review on WordPress.org"
-msgstr ""
+msgstr "Laisser un avis sur WordPress.org"
 
 #. translators: %s: site name.
 #: includes/front.php:230
 #, php-format
 msgid "Feedback board · %s"
-msgstr ""
+msgstr "Tableau de recette · %s"
 
 #: includes/front.php:263
 msgid "Feedback"
-msgstr ""
+msgstr "Recette"
 
 #: includes/front.php:265
 msgid "Pin feedback on this page"
-msgstr ""
+msgstr "Épingler des remarques sur cette page"
 
 #: includes/front.php:272
 msgid "Review this page"
-msgstr ""
+msgstr "Relire cette page"
 
 #. translators: 1: number of notes to do, 2: in progress, 3: done.
 #: includes/front.php:306
 #, php-format
 msgid "%1$d to do · %2$d in progress · %3$d done."
-msgstr ""
+msgstr "%1$d à faire · %2$d en cours · %3$d terminée(s)."
 
 #. translators: number of open notes on the page.
 #: includes/front.php:308
 #, php-format
 msgid "%d open"
-msgstr ""
+msgstr "%d ouverte(s)"
 
 #: includes/front.php:309
 msgid "(no section)"
-msgstr ""
+msgstr "(hors section)"
 
 #: includes/front.php:310
 msgid "+ Note"
-msgstr ""
+msgstr "+ Remarque"
 
 #: includes/front.php:311
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 #: includes/front.php:312
 msgid "Add a note"
-msgstr ""
+msgstr "Ajouter une remarque"
 
 #: includes/front.php:313
 msgid "Add or edit an answer"
-msgstr ""
+msgstr "Ajouter ou modifier une réponse"
 
 #: includes/front.php:314
 msgid "All pages"
-msgstr ""
+msgstr "Toutes les pages"
 
 #: includes/front.php:315
 msgid "All severities"
-msgstr ""
+msgstr "Toutes gravités"
 
 #: includes/front.php:316
 #: includes/slack.php:88
 msgid "Anonymous"
-msgstr ""
+msgstr "Anonyme"
 
 #: includes/front.php:317
 msgctxt "Verb, button label."
 msgid "Answer"
-msgstr ""
+msgstr "Répondre"
 
 #: includes/front.php:318
 msgid "Answer the note"
-msgstr ""
+msgstr "Répondre à la remarque"
 
 #: includes/front.php:319
 msgid "Answer:"
-msgstr ""
+msgstr "Réponse :"
 
 #: includes/front.php:320
 msgctxt "Noun, link to the feedback board."
 msgid "Board"
-msgstr ""
+msgstr "Tableau"
 
 #: includes/front.php:321
 msgid "Both fields are required."
-msgstr ""
+msgstr "Les deux champs sont nécessaires."
 
 #: includes/front.php:322
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: includes/front.php:323
 msgid "Click the element you want to comment on, or reach it with Tab and press Enter · Esc to cancel"
-msgstr ""
+msgstr "Cliquez sur l’élément à commenter, ou atteignez-le avec Tab puis Entrée · Échap pour annuler"
 
 #: includes/front.php:324
 msgid "Click “Sign in” and enter the key that came with your review link."
-msgstr ""
+msgstr "Cliquez sur « S’identifier » et saisissez la clé transmise avec le lien de recette."
 
 #: includes/front.php:325
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #: includes/front.php:326
 msgid "Close the list"
-msgstr ""
+msgstr "Fermer la liste"
 
 #: includes/front.php:327
 msgid "Continue"
-msgstr ""
+msgstr "Valider"
 
 #: includes/front.php:328
 msgid "Copied."
-msgstr ""
+msgstr "Copié."
 
 #. translators: error message.
 #: includes/front.php:331
 #, php-format
 msgid "Could not add: %s"
-msgstr ""
+msgstr "Ajout impossible : %s"
 
 #. translators: error message.
 #: includes/front.php:333
 #, php-format
 msgid "Could not delete: %s"
-msgstr ""
+msgstr "Suppression impossible : %s"
 
 #. translators: error message.
 #: includes/front.php:335
 #, php-format
 msgid "Could not move: %s"
-msgstr ""
+msgstr "Déplacement impossible : %s"
 
 #. translators: error message.
 #: includes/front.php:337
 #, php-format
 msgid "Could not save: %s"
-msgstr ""
+msgstr "Enregistrement impossible : %s"
 
 #. translators: error message.
 #: includes/front.php:339
 #, php-format
 msgid "Could not update: %s"
-msgstr ""
+msgstr "Modification impossible : %s"
 
 #: includes/front.php:340
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: includes/front.php:341
 msgid "Delete the note"
-msgstr ""
+msgstr "Supprimer la remarque"
 
 #: includes/front.php:342
 msgid "Delete this note for the whole team?"
-msgstr ""
+msgstr "Supprimer cette remarque pour toute l’équipe ?"
 
 #: includes/front.php:343
 msgid "Do not attach"
-msgstr ""
+msgstr "Ne pas joindre"
 
 #: includes/front.php:344
 msgid "Done"
-msgstr ""
+msgstr "Terminé"
 
 #: includes/front.php:345
 msgid "Download"
-msgstr ""
+msgstr "Télécharger"
 
 #: includes/front.php:346
 msgid "Edit the answer"
-msgstr ""
+msgstr "Modifier la réponse"
 
 #: includes/front.php:347
 msgid "Enlarge the screenshot"
-msgstr ""
+msgstr "Agrandir la capture"
 
 #: includes/front.php:348
 msgid "Everyone"
-msgstr ""
+msgstr "Tout le monde"
 
 #: includes/front.php:349
 msgid "Export"
-msgstr ""
+msgstr "Exporter"
 
 #. translators: number of notes.
 #: includes/front.php:351
 #, php-format
 msgid "Export %d note(s)"
-msgstr ""
+msgstr "Exporter %d remarque(s)"
 
 #: includes/front.php:353
-msgid "Feedback Pins, a free plugin by"
-msgstr ""
+msgid "Pinora, a free plugin by"
+msgstr "Pinora, une extension gratuite de"
 
 #. translators: number of notes.
 #: includes/front.php:356
 #, php-format
 msgid "Feedback · %d note(s)"
-msgstr ""
+msgstr "Recette · %d remarque(s)"
 
 #: includes/front.php:357
 msgid "Filter by page"
-msgstr ""
+msgstr "Filtrer par page"
 
 #: includes/front.php:358
 msgid "Filter by person"
-msgstr ""
+msgstr "Filtrer par personne"
 
 #: includes/front.php:359
 msgid "Filter by severity"
-msgstr ""
+msgstr "Filtrer par gravité"
 
 #: includes/front.php:360
 msgid "Follows the current filters. Grouped by page then section: paste it as is into a ticket or an AI assistant."
-msgstr ""
+msgstr "Selon les filtres en cours. Groupé par page puis par section : à coller tel quel dans un ticket ou un assistant IA."
 
 #: includes/front.php:361
 msgid "Footer"
-msgstr ""
+msgstr "Pied de page"
 
 #: includes/front.php:362
 msgid "Header"
-msgstr ""
+msgstr "En-tête"
 
 #: includes/front.php:363
 #: includes/notes.php:61
 msgid "In progress"
-msgstr ""
+msgstr "En cours"
 
 #: includes/front.php:364
 msgid "In sync with the team"
-msgstr ""
+msgstr "Synchronisé avec l’équipe"
 
 #. translators: error message.
 #: includes/front.php:366
 #, php-format
 msgid "Key refused: %s"
-msgstr ""
+msgstr "Clé refusée : %s"
 
 #: includes/front.php:367
 msgid "Leave review mode"
-msgstr ""
+msgstr "Quitter la recette"
 
 #: includes/front.php:368
 msgctxt "Noun, button that opens the list of notes."
 msgid "List"
-msgstr ""
+msgstr "Liste"
 
 #: includes/front.php:369
 msgid "Mark as fixed"
-msgstr ""
+msgstr "Marquer corrigé"
 
 #. translators: %s: column name, e.g. "In progress".
 #: includes/front.php:371
 #, php-format
 msgid "Moved to %s"
-msgstr ""
+msgstr "Déplacée vers %s"
 
 #: includes/front.php:372
 msgid "Missing review key."
-msgstr ""
+msgstr "Clé de recette manquante."
 
 #. translators: column name, e.g. "In progress".
 #: includes/front.php:374
 #, php-format
 msgid "Move to %s"
-msgstr ""
+msgstr "Déplacer vers %s"
 
 #: includes/front.php:375
 msgid "New note"
-msgstr ""
+msgstr "Nouvelle remarque"
 
 #: includes/front.php:376
 msgid "New “To do” note"
-msgstr ""
+msgstr "Nouvelle remarque « À faire »"
 
 #: includes/front.php:377
 msgid "No open note on this page. Click “+ Note” to add one."
-msgstr ""
+msgstr "Aucune remarque ouverte sur cette page. Cliquez sur « + Remarque » pour en ajouter une."
 
 #: includes/front.php:378
 msgid "No screenshot on this page: the note will be located by its position."
-msgstr ""
+msgstr "Capture indisponible sur cette page : la remarque sera repérée par sa position."
 
 #. translators: pin number.
 #: includes/front.php:380
 #, php-format
 msgid "Note %d"
-msgstr ""
+msgstr "Remarque %d"
 
 #: includes/front.php:381
 msgid "Note saved, the whole team can see it."
-msgstr ""
+msgstr "Remarque enregistrée, visible par toute l’équipe."
 
 #: includes/front.php:382
 msgid "Notes are shared: what one person pins shows up for everyone else, without reloading."
-msgstr ""
+msgstr "Les remarques sont partagées : ce qu’une personne relève apparaît chez toutes les autres, sans recharger la page."
 
 #: includes/front.php:383
 msgid "Notes on this page"
-msgstr ""
+msgstr "Remarques de cette page"
 
 #: includes/front.php:384
 msgid "Nothing to do. Add a note (+) or pin one right on the site."
-msgstr ""
+msgstr "Rien à faire. Ajoutez une remarque (+) ou relevez-la directement sur le site."
 
 #: includes/front.php:385
 msgid "Open the page at this spot"
-msgstr ""
+msgstr "Ouvrir la page à cet endroit"
 
 #: includes/front.php:386
 msgid "Page (path)"
-msgstr ""
+msgstr "Page (chemin)"
 
 #: includes/front.php:387
 msgid "Pin number on the page"
-msgstr ""
+msgstr "Numéro de la pastille sur la page"
 
 #: includes/front.php:388
 msgid "Reopen"
-msgstr ""
+msgstr "Rouvrir"
 
 #: includes/front.php:390
 msgid "Review the site →"
-msgstr ""
+msgstr "Relever sur le site →"
 
 #: includes/front.php:392
 msgid "Screenshot attached to the note"
-msgstr ""
+msgstr "Capture jointe à la remarque"
 
 #. translators: pin number.
 #: includes/front.php:394
 #, php-format
 msgid "Screenshot of note #%d"
-msgstr ""
+msgstr "Capture de la remarque #%d"
 
 #: includes/front.php:395
 msgid "Screenshot removed."
-msgstr ""
+msgstr "Capture retirée."
 
 #: includes/front.php:396
 #: includes/slack.php:135
 msgid "Screenshot taken with the note"
-msgstr ""
+msgstr "Capture de l’écran au moment de la remarque"
 
 #: includes/front.php:397
 msgid "Screenshot…"
-msgstr ""
+msgstr "Capture…"
 
 #: includes/front.php:398
 msgid "Section (optional)"
-msgstr ""
+msgstr "Section (facultatif)"
 
 #. translators: section name, e.g. "Footer".
 #: includes/front.php:400
 #, php-format
 msgid "Section: %s"
-msgstr ""
+msgstr "Section : %s"
 
 #: includes/front.php:401
 msgid "Sending…"
-msgstr ""
+msgstr "Envoi…"
 
 #: includes/front.php:402
 msgid "Severity"
-msgstr ""
+msgstr "Gravité"
 
 #. translators: number of closed notes.
 #: includes/front.php:404
 #, php-format
 msgid "Show %d closed note(s)"
-msgstr ""
+msgstr "Afficher les %d remarque(s) traitée(s)"
 
 #: includes/front.php:405
 msgid "Sign in"
-msgstr ""
+msgstr "S’identifier"
 
 #. translators: reviewer first name.
 #: includes/front.php:407
 #, php-format
 msgid "Signed “%s”. ⌘/Ctrl + Enter to save."
-msgstr ""
+msgstr "Signée « %s ». ⌘/Ctrl + Entrée pour enregistrer."
 
 #. translators: error message.
 #: includes/front.php:409
 #, php-format
 msgid "Sync failed: %s"
-msgstr ""
+msgstr "Synchronisation impossible : %s"
 
 #: includes/front.php:410
 msgid "Taking a screenshot…"
-msgstr ""
+msgstr "Capture d’écran en cours…"
 
 #: includes/front.php:411
 msgid "The browser refused to copy: the text is selected, press ⌘/Ctrl + C."
-msgstr ""
+msgstr "Copie refusée par le navigateur : le texte est sélectionné, faites ⌘/Ctrl + C."
 
 #: includes/front.php:412
 msgid "This note has been deleted in the meantime."
-msgstr ""
+msgstr "Cette remarque a été supprimée entre-temps."
 
 #: includes/front.php:413
 #: includes/notes.php:60
 msgid "To do"
-msgstr ""
+msgstr "À faire"
 
 #: includes/front.php:414
 msgid "View on the page →"
-msgstr ""
+msgstr "Voir sur la page →"
 
 #: includes/front.php:415
 msgid "Who is reviewing?"
-msgstr ""
+msgstr "Qui relève ?"
 
 #. translators: reviewer first name.
 #: includes/front.php:417
 #, php-format
 msgid "You are %s"
-msgstr ""
+msgstr "Vous êtes %s"
 
 #: includes/front.php:418
 msgid "Your first name"
-msgstr ""
+msgstr "Votre prénom"
 
 #: includes/front.php:419
 msgid "Your note"
-msgstr ""
+msgstr "Votre remarque"
 
 #: includes/front.php:420
 msgid "Your first name signs your notes, so the team knows who spotted what. The key came with your review link."
-msgstr ""
+msgstr "Votre prénom signe vos remarques, pour que l’équipe sache qui a relevé quoi. La clé vous a été transmise avec le lien de recette."
 
 #: includes/front.php:421
 msgctxt "Noun, label in the Markdown export."
 msgid "answer"
-msgstr ""
+msgstr "réponse"
 
 #: includes/front.php:422
 msgid "e.g. Camille"
-msgstr ""
+msgstr "Ex : Camille"
 
 #: includes/front.php:423
 msgid "e.g. Footer"
-msgstr ""
+msgstr "Ex : Pied de page"
 
 #: includes/front.php:424
 msgid "e.g. align the spacing between the result cards"
-msgstr ""
+msgstr "Ex : harmoniser les espacements des cartes de résultats"
 
 #: includes/front.php:425
 msgid "e.g. fixed, live in 3 minutes · or: won’t fix, because…"
-msgstr ""
+msgstr "Ex : corrigé, en ligne dans 3 min · ou : non retenu, parce que…"
 
 #: includes/front.php:426
 msgid "e.g. the button is too small on mobile, the text should say…"
-msgstr ""
+msgstr "Ex : le bouton est trop petit sur mobile, le texte devrait dire…"
 
 #. translators: export date.
 #: includes/front.php:428
 #, php-format
 msgid "exported %s"
-msgstr ""
+msgstr "export : %s"
 
 #. translators: pin number.
 #: includes/front.php:430
 #, php-format
 msgid "pin #%d"
-msgstr ""
+msgstr "pastille #%d"
 
 #: includes/front.php:431
 msgctxt "Noun, label in the Markdown export."
 msgid "screen"
-msgstr ""
+msgstr "écran"
 
 #: includes/front.php:432
 msgctxt "Noun, label in the Markdown export."
 msgid "screenshot"
-msgstr ""
+msgstr "capture"
 
 #: includes/front.php:433
 msgctxt "Noun, CSS selector label in the Markdown export."
 msgid "selector"
-msgstr ""
+msgstr "sélecteur"
 
 #: includes/notes.php:54
 msgid "Blocker"
-msgstr ""
+msgstr "Bloquant"
 
 #: includes/notes.php:55
 msgid "Major"
-msgstr ""
+msgstr "Majeur"
 
 #: includes/notes.php:56
 msgid "Minor"
-msgstr ""
+msgstr "Mineur"
 
 #: includes/notes.php:57
 msgid "Nice to have"
-msgstr ""
+msgstr "Confort"
 
 #: includes/notes.php:62
 msgid "Fixed"
-msgstr ""
+msgstr "Corrigé"
 
 #: includes/notes.php:63
 msgid "Won't fix"
-msgstr ""
+msgstr "Non retenu"
 
 #: includes/notes.php:127
 #: includes/notes.php:129
 msgid "Feedback notes"
-msgstr ""
+msgstr "Remarques de recette"
 
 #: includes/notes.php:130
 msgid "Feedback note"
-msgstr ""
+msgstr "Remarque de recette"
 
 #: includes/rest.php:39
 msgid "Missing or invalid review key."
-msgstr ""
+msgstr "Clé de recette manquante ou invalide."
 
 #: includes/rest.php:118
 msgid "Note not found (deleted in the meantime?)."
-msgstr ""
+msgstr "Remarque introuvable (supprimée entre-temps ?)."
 
 #: includes/rest.php:159
 msgid "The note is empty."
-msgstr ""
+msgstr "La remarque est vide."
 
 #. translators: %s: database error message.
 #: includes/rest.php:173
 #, php-format
 msgid "Could not save the note: %s"
-msgstr ""
+msgstr "Écriture impossible : %s"
 
 #. translators: %s: name of the page section, e.g. "Footer".
 #: includes/slack.php:103
 #, php-format
 msgid "section “%s”"
-msgstr ""
+msgstr "section « %s »"
 
 #. translators: %d: browser window width in pixels.
 #: includes/slack.php:105
 #, php-format
 msgid "%d px wide"
-msgstr ""
+msgstr "écran de %d px"
 
 #. translators: %d: note number.
 #: includes/slack.php:116
 #, php-format
 msgid "new note #%d"
-msgstr ""
+msgstr "nouvelle remarque #%d"
 
 #: includes/slack.php:146
 msgid "View on the page"
-msgstr ""
+msgstr "Voir sur la page"
 
 #. translators: 1: author name, 2: page path.
 #: includes/slack.php:164
 #, php-format
 msgid "New feedback from %1$s on %2$s"
-msgstr ""
+msgstr "Nouvelle remarque de %1$s sur %2$s"
 
 #: includes/slack.php:187
 msgid "No Slack webhook configured."
-msgstr ""
+msgstr "Aucun webhook Slack configuré."
 
 #. translators: 1: HTTP status code, 2: Slack error message.
 #: includes/slack.php:208
 #, php-format
 msgid "Slack answered %1$d: %2$s"
-msgstr ""
+msgstr "Slack a répondu %1$d : %2$s"
